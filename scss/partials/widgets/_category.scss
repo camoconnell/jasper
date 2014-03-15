@@ -1,0 +1,168 @@
+    /* =Journal : Category Widget
+----------------------------------------------- */
+
+.categoryWidget {
+    width: 33.3%;
+    padding: 5px;
+    border: solid 2px $beige;
+    right: 0;
+    top: 0;
+    position: absolute;
+    background: rgba(58, 66, 132,0.4);
+    overflow: hidden;
+    
+    @include transition( width  $duration-slow $easing );
+    @include breakpoint( $mq-large ) { width: 50%; }
+    @include breakpoint( 1030px) {  width: 100%; } 
+
+    .categories {
+        width: 30%;
+        position: relative;
+        border-right: $base-border;
+        float: left;
+        height: 120px;
+        border-top: none;
+        margin-top: 0px;
+        @include breakpoint( $mq-small ) { 
+            width: 100%;
+            border-right: none;
+            height:80px;
+            border-top: $base-border;
+            margin-top: 30px;
+        }
+
+        .listItem{ position: absolute; }
+        .listItem svg path { 
+            fill : $beige;
+            @include transition( fill 400ms linear );
+            @include transition( stroke 400ms linear );
+        }
+        .listItem.selected svg path { 
+            fill : $journal-colour; 
+            stroke : $journal-colour; 
+        }
+    }
+}
+
+        .categoryWidget .categories .listItem:nth-child(2) { top: 25%; left: 25%; }
+        .categoryWidget .categories .listItem:nth-child(3) { top: 50%; left: 54%; }
+        .categoryWidget .categories .listItem:nth-child(4) { bottom: 0; left: 0; }
+        .categoryWidget .categories .listItem:nth-child(5) { bottom:0; right: 0;}
+        .categoryWidget .categories .listItem:nth-child(6) { top: 2%; right: 3%; } 
+
+.categoryWidget .description {
+    width: 70%;
+    padding: 0 36px 0 8px;
+    float: left;
+    position: relative;
+    height: 120px;
+    overflow: hidden; 
+    z-index: 0;
+    @include breakpoint( $mq-small ) { 
+        width: 100%;
+        height: auto;
+        position: absolute;
+        top: 0;
+        padding: 2px 0 0 0;
+    }
+    @include breakpoint( 1120px ) { padding-right:0; }
+}
+
+    .categoryWidget .mover{
+        width: 70%;
+        padding: 5px 5px 5px 8px;
+        z-index: 10;
+        right: 0;
+        position: absolute;
+        height: 134px;
+        top: -130px;
+        display:block;
+        @include breakpoint( $mq-small ) { display:none }
+    }
+
+    .categoryWidget .mover{ @include transition-duration( $duration-fast ); }
+    .categoryWidget .mover.delay{ @include transition-delay( $duration-medium ); }
+    .categoryWidget .mover.display  { top:0; } 
+
+        .categoryWidget .description .info{
+            width: 100%;
+            height: 120px;
+            @include breakpoint( $mq-small ) { 
+                height: auto;
+            }
+        }
+
+            .categoryWidget  h2{
+                font-size: em(20px);
+                text-align: left;
+                letter-spacing: em(3px);
+                position: relative;
+            }
+
+            .categoryWidget  p{
+                color: $beige; 
+                text-align: left;
+                text-align: left;
+                position: relative;
+                letter-spacing: em(2px);
+                font-size: em(14px);
+                display:block;
+                @include breakpoint( $mq-small ) { display:none }
+            }
+
+        .categoryWidget .mover .update{
+            width: 100%;
+            height: 120px;
+            background: $about-colour;
+        }
+
+        .categoryWidget .post-title-wrap { top:45% }
+
+    .categoryWidget .layout {
+        bottom: 6px;
+        right: 3px;
+        width: 34px;
+        position: absolute;
+        height: 34px;
+        display:block; 
+        z-index: 1;
+
+        @include breakpoint( 1120px ) { display:none; }
+    }
+ 
+        .categoryWidget .layout.hide { display: none }
+
+        .categoryWidget  .block {
+            background-color:  $journal-colour;
+        }
+
+        .categoryWidget .block {
+            border: 1px solid $journal-colour;
+            background-color: rgba( 253 , 106 , 98 , 0 ); 
+        }   
+ 
+        .categoryWidget .layout .small,
+        .categoryWidget .layout .large { display : none; }
+        .categoryWidget .layout .display { display : block; }
+        .categoryWidget .layout .bottom {
+            top: 16px;
+            position: absolute;
+        }
+
+            .categoryWidget .layout .small .block {
+                width:9px;
+                height:10px;
+                float:left;
+                margin: 0 2px 3px 0;
+            }
+
+            .categoryWidget .layout .large .block {
+                width:14px;
+                height:13px;
+                float:left;
+                margin: 0 2px 3px 0;
+            }
+
+            .categoryWidget .layout .large .block:nth-child(even),
+            .categoryWidget .layout .small .block:nth-child(2) {  margin-top: 4px }
+            .categoryWidget .layout .small .block:nth-child(3) {  margin-top: 8px }

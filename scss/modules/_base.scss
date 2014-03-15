@@ -1,0 +1,69 @@
+// Use Compass
+@import "compass"; 
+@import "_placeholder"; 
+@import "_breakpoints"; 
+@import "_animation"; 
+@import "_animation-delay";
+@import "_keyframes"; 
+
+// Font weights
+$light: 100;
+$regular: 400;
+$bold: 600;
+
+// Transitions
+$easing: ease-out;
+$ease-out-back: cubic-bezier(0.750, -0.005, 0.375, 1.005);
+
+$duration-really-slow : 1.2s;
+$duration-slow 	: 0.8s;
+$duration-medium: 0.6s;
+$duration-fast 	: 0.3s;
+$duration-none 	: 0s;
+
+// Colours 
+$beige: #fefbf2;
+$navy: #3a4284; 
+$light-blue: #747bb4;
+$dark-red: #c44545;
+
+$home-colour: $beige;
+$about-colour: #fd6a62;
+$goodwords-colour: #7bb7fa;
+$training-colour: #0ac2d2;
+$journal-colour: #f9f296;
+$sayhi-colour: $navy;
+
+// Base Font
+$base-font-family: 'Arbutus Slab', serif;
+$base-font-weight: $regular;
+$base-font-color: #fefbf2;
+$base-font-size: 16px;
+$base-font-size-rem: 1.6rem;
+$base-line-height: 1.5;
+$base-text-align: center;
+
+// Misc
+$base-border: $beige solid 1px;
+
+$font-size-enormous: 2.5em;
+$font-size-really-large: 1.6em;
+$font-size-large: 1.2em;
+$font-size-medium: 1em;
+$font-size-small: .85em;
+$font-size-really-small: .6em;
+
+$skew-x: 0deg;
+$skew-y: -4deg; 
+$skew-neg-y: 4deg; // confusing ha
+
+// Headings
+$header-font-family: 'mosq', sans-serif;
+$header-font-weight: $regular;
+$header-letter-spacing: .1em; 
+
+
+// Media Queries
+$mq-small: 650px;
+$mq-medium: 1250px;
+$mq-large: 1450px;

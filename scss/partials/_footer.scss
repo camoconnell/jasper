@@ -1,0 +1,45 @@
+/* =Footer
+----------------------------------------------- */
+
+footer { 
+    position: fixed; 
+    z-index: 7; 
+    top: 10px; 
+    width:100%; 
+    display: none;
+}
+
+    footer.selected  h1.contact { margin-bottom:-60px;}
+
+    footer h1 {color: $beige; font-size: 28px;}
+
+    footer h1.contact { 
+        padding-top: 20px;
+        border: $base-border;
+        border-bottom: $beige solid 10px;
+        position: relative; 
+        margin: 0 auto -100px;
+        width: 170px;
+        background: $navy; 
+    }
+
+    footer p {
+        font-family: georgia; 
+        letter-spacing: $header-letter-spacing;
+    }
+
+
+
+/*Repeated inline svg wave*/
+.footer-top {  height:17px; }
+
+footer svg path { 
+    fill : $navy;
+    @include transition( fill 400ms linear ); 
+}
+
+.footer-content { 
+    background: url('images/svgs/pattern.svg') repeat $navy;
+    padding-top: 90px;
+}
+ 

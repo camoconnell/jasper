@@ -1,0 +1,33 @@
+   /* =Journal/Pagination
+----------------------------------------------- */  
+ 
+.pagination {
+    position: relative;
+    width:100%;
+    //margin: em(100px) auto em(200px);
+    opacity:0
+}
+    .pagination .partition{ 
+        float: left;
+        width: 40%;
+        background: $journal-colour;
+        height: em(8px)
+    }
+
+    .pagination .btn{ 
+        top: em(-36px);
+        position: relative;
+        margin: 0 auto; 
+        border: em(8px) solid $journal-colour;
+        height: em(80px);
+        width: 20%;
+        float: left;
+        
+        @include skew( $skew-x , $skew-y );
+    }
+ 
+        .pagination h2 {
+            letter-spacing: em(5px);
+            font-size: em(34px);
+            padding: em(5px);
+        }

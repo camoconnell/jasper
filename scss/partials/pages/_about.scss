@@ -1,0 +1,272 @@
+    /* =About
+----------------------------------------------- */  
+ 
+.about #content { border-color : $about-colour; }
+.about .divider,
+.about .footer-content { background-color : $about-colour; }
+.about footer svg path { fill : $about-colour; } 
+
+	#content section#about>.inner {
+		margin-top: 110px;
+		@include breakpoint( $mq-small ) { margin-top: 40px;}
+	}
+
+	#about .divider {
+	    margin-left: -20%;
+	    width: 40%; 
+
+		@include breakpoint( $mq-medium ) {  margin-left: -35%; width: 70%; }
+		// @include breakpoint( 500px ) {  margin-left: -40%; width: 80%; }
+		@include breakpoint( $mq-small ) { 
+	        margin-left: -47.5%;
+	        width: 95%;
+	    }
+	}
+
+ 
+	#about .content { 
+		margin:100px auto 200px; 
+		max-width:40%; 
+		line-height:30px; 
+
+		@include breakpoint( $mq-medium ) {  max-width:70%; }
+		//@include breakpoint( 500px ) {  max-width:80%; }
+		@include breakpoint( $mq-small ) { 
+	        margin: 40px auto;
+	        max-width: 95%;
+	    }
+	}
+ 
+
+	#about .content > section { margin-bottom: 100px; }
+	#about-background { 
+		background: $beige;
+	}
+
+
+	#about .content-selector {
+		margin-top: -60px;
+		top: 40%;
+		height: 120px;
+		left: 0;
+		width: 30%;
+		z-index: 4;
+		position: absolute;
+		display: block; 
+
+		@include breakpoint( $mq-medium ) { width:15% } 
+		//@include breakpoint( 500px ) { display:none }
+		@include breakpoint( $mq-small ) { display:none }
+	}
+
+		#about .content-selector p {
+			margin-bottom: 20px;
+			letter-spacing: .1em;
+			cursor: pointer;
+		}
+
+		#about p .large {
+			display:block;
+			@include breakpoint( $mq-medium ) { display:none } 
+		}
+		#about p .small {
+			display:none ;
+			@include breakpoint( $mq-medium ) {  display:block  } 
+		}		
+
+		#about .content-selector p.current {
+			color:#fd6a62;
+		}
+
+		#about .content-selector p:hover {
+			color:#fd6a62;
+		}
+		 
+	// BLURB
+
+	#about .content-wrap .blurb:first-letter { 
+		font-size:$font-size-really-large; 
+		color:rgb(253, 106, 89);
+	}
+
+	#about .content-wrap .job-title {
+	    font-style:normal;
+	    font-size: $font-size-really-small;
+		float: left;
+		display:block; 
+		//@include breakpoint( 500px ) { display:none }
+		@include breakpoint( $mq-small ) { display:none }
+	}
+	   
+	#about .content-wrap img.signature {  
+		margin-top: 2px; 
+		display:block; 
+		// @include breakpoint( 500px ) { display:none } 
+		@include breakpoint( $mq-small ) { display:none }
+	}
+	#about .content-wrap img.reps {
+		float: left;
+		margin-right: 18px;
+		@include breakpoint( $mq-small ) {
+			float:none; 
+			margin-right:0;
+		}
+	} 
+
+
+	#about .content-wrap .blurb {
+		padding: 80px 10% 100px;
+		position: relative;
+		z-index: 3;
+		@include breakpoint( $mq-small ) { 
+	        padding: 40px 10%;
+	    }
+	    p {
+	    	@include breakpoint( $mq-small ) { 
+		    	font-size: 13px;
+				line-height: 25px;
+				letter-spacing: 1px
+			}
+	    }
+	}
+
+	#about .signature-wrap {
+		position: relative;
+		margin: 50px auto 0;
+		width: 310px;
+		@include breakpoint( $mq-small ) { 
+	        width: auto;
+	    }
+	}
+	#about .signature { position: relative;}
+
+
+
+ 
+
+	// SKILLS
+
+	#about .content {  
+		position: relative;  
+		color:$navy; 
+	}
+
+		#about .content  h2{ font-size: 1.4em; }
+		#about .content ul{ margin: 0; }
+
+			#about .content ul li{  
+				border: 10px solid $navy;
+				width: 32%;
+				display: block;
+				border-radius:50%;
+				float: left;
+				margin: 0 2% 2% 0;
+				position: relative;
+				font-size: 1.2em;
+				color:$navy;
+
+				//@include breakpoint( mama-bear ) { font-size: .9em; }
+				@include breakpoint( $mq-large ) {  border-width:6px; font-size: 1em;}				
+				@include breakpoint( $mq-medium ) { font-size: 1.4em;  border-color:$beige; color:$beige; }
+				@include breakpoint( 950px ) { line-height: 2em; width: 48%; margin: 0 4% 4% 0; border-width:8px}
+				@include breakpoint( $mq-medium ) {  border-width:6px; font-size: .9em; }
+			}
+
+
+			// Retain Aspect Ratio
+			#about .content ul .fifty-fifty.aspect-ratio { padding-bottom: 100% }
+			#about .content ul li .skill { 
+				width: 100%;
+				margin-top: -35px;
+				height: 70px;
+				top: 50%;
+				position: absolute;
+				padding: 0% 12%;
+			} 
+			#about .content ul h3 { 
+				font-size: 1.3em;
+				border-top: 3px solid;
+				border-bottom: 3px solid;
+			}
+			#about .content ul .spacer {
+			    position: absolute;
+			    top: 0;  bottom: 0;  left: 0;  right: 0;
+			}
+
+			#about .content ul li:nth-child(3n){ 
+				margin-right:0;
+				@include breakpoint( 950px ) { margin-right:4%; }
+			}
+			#about .content ul li:nth-child(2n){
+				@include breakpoint( 950px ) { margin-right:0; }
+			} 
+
+			// Skills header
+			#about .content ul li:first-child h3{ color:$about-colour; border:none;}
+			#about .content ul li:first-child .skill{margin-top:-16px}
+			#about .content ul li:first-child { border: dashed 3px $about-colour; }
+
+			#about .content ul li:nth-child(3) h3,
+			#about .content ul li:nth-child(9) h3{ font-size: 1.2em; } 
+ 
+
+	// Positions
+	#about {
+		.positions {
+
+			h1 {
+				color:$about-colour;
+				margin-bottom: 25px;
+				font-size: 50px;
+			}
+
+			margin: 0 0 10px;
+
+			.position { 
+				background: $beige;
+				margin: 0 0 8px;
+				padding: 3em 0;
+
+				.date{
+					color: #ddd8c7;
+					font-size: 14px;
+				}
+				p { padding: 5px 10%;}  
+			}
+		}
+	}
+	#about .footer { position: relative; } 
+
+    
+
+    // EXTEND 
+    // Scroll bar
+    .about .mCSB_scrollTools .mCSB_dragger:active .mCSB_dragger_bar,
+    .about .mCSB_scrollTools .mCSB_dragger.mCSB_dragger_onDrag .mCSB_dragger_bar{ background: $about-colour; }
+    .about .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar{ border-color: $about-colour; }
+
+    #about .arrow-up{ 
+		left: 0;
+		width: 30%; 
+		position: absolute; 
+	}
+		.about .arrow-up .inner svg path{ fill : $about-colour; }
+		.about .arrow-up .inner { border-top-color : $about-colour; }
+
+    // extend menu
+    #menu-item-about.current-menu-item a,
+    #menu-item-about:hover a  { color: $about-colour; }
+    #menu-item-about.current-menu-item svg path ,
+    #menu-item-about:hover svg path { stroke : $about-colour; }
+
+#about {
+    .icon{
+        svg path { fill: $beige; }
+        svg circle { stroke: $beige; }
+		&:hover {
+			svg path { fill: $about-colour; }
+        	svg circle { stroke: $about-colour; }
+		} 
+    }
+}
+ 

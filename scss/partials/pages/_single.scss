@@ -1,0 +1,163 @@
+    /* =Single
+----------------------------------------------- */  
+.single .arrow-up .inner svg path{ fill : $journal-colour; }
+.single .arrow-up .inner { border-top-color : $journal-colour; }
+.single #content { border-color : $journal-colour; }
+.single .divider,
+.single .footer-content { background-color : $journal-colour; }
+.single footer svg path { fill : $journal-colour; }
+.single #logo-cam svg path { fill : $beige; }
+
+#single {
+    left: 0;
+    top: 0;
+    z-index: 5;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+
+    .arrow {
+        svg {
+            fill: $journal-colour;
+        }
+    }
+
+    > .inner {
+        height:100%;
+        margin-top: 110px; 
+        @include breakpoint( $mq-small ) { margin-top: 40px;}
+        @media screen and (max-height: 400px) { margin-top: 40px;}
+    }
+
+    .divider{
+        margin-left: -20%;
+        width: 40%; 
+
+        @include breakpoint( $mq-medium ) {  margin-left: -35%; width: 70%; }
+        @include breakpoint( $mq-small ) { 
+            margin-left: -47.5%;
+            width: 95%;
+        }
+    }
+
+    .content {
+        margin: 100px auto 200px;
+        width: 40%;
+        line-height: 30px;
+
+        @include breakpoint( $mq-medium ) {   width: 70%; }
+        @include breakpoint( $mq-small ) { 
+            margin: 80px auto;
+            max-width: 95%;
+            width: 100%;
+        }
+    }
+
+    .holder .button {
+        margin: 16px 5px;
+        h4 {
+            line-height: 1.5em;
+        }
+    }
+
+    .post-inner {
+        margin-top: 30px;
+    }
+
+    .post-title-wrap{
+        position:relative;
+        margin-top: 0;
+
+        .post-title-inner{ 
+            max-width: 1000px;
+            border: 2px solid;
+            font-size: 3.5em;
+            line-height: 1.5em;
+            padding: 0 15px;
+
+            @include breakpoint( 500px) { font-size: $font-size-enormous } 
+        }
+
+        .date { 
+            border: 5px solid;  
+            font-size: 1.2em;
+            letter-spacing: .2em;
+        }
+    }
+
+    .social-media-icons{
+        background: none;
+        top: 15px;
+        width: 282px;
+        @include skew( $skew-x , $skew-y );
+        .button {
+            margin-right:10px;
+            height: 28px;
+            h4 { padding: 0px; }
+            &:last-child {margin-right: 0px;}
+        }
+    }
+
+    .copy-wrap { 
+        background: $beige;
+        @include skew( $skew-x , $skew-y );
+        p:first-child:first-letter {
+            font-size: 1.5em;
+            letter-spacing: 1px;
+            //color: #1ba8a3;
+        }
+    }
+
+    .copy {
+        position: relative;
+        z-index: 5; 
+        color: $navy;
+        padding: 50px 10%; 
+        font-size: 1.1em;
+
+        @include skew( $skew-x , $skew-neg-y );
+        @include breakpoint( 500px) { font-size: .95em; } 
+    }
+}
+
+
+
+#single .footer {
+    padding: 100px 0;
+    background: #fefbf2;
+    z-index: 1;
+    position: relative;
+    margin-top: -50px;
+}
+#single .footer .image-clip { height: 200px }
+
+
+#single p { margin-bottom: 1.5em; } 
+
+
+    // extend scroll bar
+    .single .mCSB_scrollTools .mCSB_dragger:active .mCSB_dragger_bar,
+    .single .mCSB_scrollTools .mCSB_dragger.mCSB_dragger_onDrag .mCSB_dragger_bar{ background: $journal-colour; }
+    .single .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar{ border-color: $journal-colour; }
+
+    #single .arrow-up{ 
+        left: 0;
+        width: 7%; 
+        position: absolute; 
+    }
+        .single .arrow-up .inner svg path{ fill : $journal-colour; }
+        .single .arrow-up .inner { border-top-color : $journal-colour; }
+
+#single {
+    .icon{
+        svg path { fill: $beige; }
+        svg circle { stroke: $beige; }
+        &:hover {
+            svg path { fill: $journal-colour; }
+            svg circle { stroke: $journal-colour; }
+        }
+    }
+}
+
+
+

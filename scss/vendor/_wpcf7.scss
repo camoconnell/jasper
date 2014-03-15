@@ -1,0 +1,43 @@
+/* =Wordpress Contact Form 7 Plugin 
+----------------------------------------------- */
+
+
+div.wpcf7 { margin: 50px auto 0; padding-bottom: 100%}
+
+div.wpcf7 input[type="text"], 
+div.wpcf7 input[type="email"]{
+    outline: none;
+    padding:10px 0 13px;
+    font-style:italic;
+    letter-spacing:1px;
+    /*font-family: 'Lora', Georgia, serif;*/
+    width:90%;
+    color: #fefbf2;
+    background: url('images/contact-squiggle.gif') repeat-x;
+    background-position:bottom left;
+}
+
+div.wpcf7 input[type="submit"] {
+    background:#c44545;
+    border: 6px solid #fefbf2;
+    border-color: #fefbf2;
+    box-shadow:none;
+    width:120px;
+    height:120px;
+    border-radius:60px;
+    text-transform: uppercase;
+    color:#fefbf2;
+    font-family: 'mosq', sans-serif;
+    font-size:20px;
+    text-shadow:none;
+    letter-spacing:1px;
+    margin-top: 40px;
+} 
+
+div.wpcf7 input[type="submit"]:hover {
+    background:#c44545;
+    border: 0px solid #fefbf2;
+    width:120px;
+    height:120px;
+    border-radius:64px;
+} 

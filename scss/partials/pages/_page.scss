@@ -1,0 +1,112 @@
+/* = All pages
+----------------------------------------------- */
+    
+#content { 
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    opacity:0;
+    border-right: solid;
+    border-left: solid;
+    border-top: solid;
+    border-width:3px;
+    border-color:$home-colour;
+    overflow:hidden;
+
+    @include perspective( 1400px );
+    @include transform-style( preserve-3d );
+
+    @include breakpoint( 800px) { border-width: 2px };
+    @include transition( border-color 400ms linear );
+}
+ 
+#content > section {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0; 
+    visibility: hidden;
+
+    @include backface-visibility( hidden );
+    @include translate3d( 0, 0, 0 );
+} 
+
+#content > .current-page,
+.no-js .pt-page { z-index:10; visibility: visible; overflow: hidden;}
+
+#content .current-page {
+    left: 0%;
+    @include transition(left 300ms ease-out 500ms);
+}
+
+.menu-open #content .current-page { left: 100%;} 
+.divider {
+    z-index: 10;
+    left: 50%;
+    position: absolute;
+    height: 8px;
+}
+ 
+#content > section > .inner, 
+.content-wrap {
+    height: 100%;
+	width: 100%; 
+}
+
+.scrollpane {
+    overflow: auto;
+    margin-top: 80px;
+    position: relative;
+    height: 100%;
+    width: 100%;
+    z-index: 2;
+
+    @include transition( margin 400ms ease-out );
+    @include breakpoint( 800px ) { margin-top: 0; }
+}
+ 
+.no-js body { overflow: auto; }
+ 
+.pt-page-ontop { z-index: 999; }
+
+.background { 
+    height: 100%;
+    width: 100%;
+    top:0;
+    z-index: 0;
+    position:absolute;
+    display: block; 
+    background-repeat: no-repeat;
+    background-position:center;
+    background-attachment: fixed;
+
+    @include background-size( cover );
+}
+
+.background-wrap {
+    left: 0;
+    top: 0;
+    position: fixed;
+    width:100%;
+    height:100%;
+}
+
+.background-shadow {
+    z-index: 1;
+    position: relative;
+    height: 100%;
+    width: 100%;
+    background: url('images/vig.png') no-repeat center;
+}
+    
+.content-wrap {
+    position: relative;
+    z-index: 2;
+    margin: 30px auto 140px;
+    width: 100%;
+}
+
+.content { position: relative; }
+    
+    

@@ -1,0 +1,17 @@
+.social-media-icons {
+    position: relative;
+    display: block;
+    height: 27px;
+    width: 260px;
+    padding: 0;
+    margin: 0 auto;
+    top: -15px;
+
+    a {
+        text-decoration: none;
+    }
+}
+.button { height:24px; margin: 1px; float: left; width: 84px; background: $about-colour}
+.button h4{ color: #fefbf2; text-align: center; padding: 4px 0px; letter-spacing: 2px; font-size: 12px;}
+#home .facebook {margin-left: 2px;}
+#home .proper{top: 0px; left: 7px;}

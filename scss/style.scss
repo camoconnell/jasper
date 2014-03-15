@@ -1,0 +1,47 @@
+/*!
+Theme Name: jasper
+Theme URI: http://camoconnell.com
+Author: Cam O'Connell
+Author URI: http://camoconnell.com
+Description: Dope Shit
+Version: 1.0
+License: GNU General Public License
+License URI: license.txt
+Tags:
+*/
+
+// Modules and Variables
+@import "modules/_base";
+
+
+// Partials
+@import "partials/_reset";
+@import "partials/_global";
+@import "partials/_fonts";
+@import "partials/_transitions";
+@import "partials/_preloader";
+@import "partials/_share-btns";
+@import "partials/_titles";
+@import "partials/widgets/_follow-me";
+
+@import "partials/_header";
+@import "partials/_footer";
+
+@import "partials/pages/_page";
+@import "partials/pages/_home";
+@import "partials/pages/_journal";
+@import "partials/pages/_single";
+@import "partials/pages/_about";
+@import "partials/pages/_training";
+@import "partials/pages/_goodwords";
+
+@import "partials/widgets/_category";
+@import "partials/widgets/_pagination";
+@import "partials/widgets/_menu";
+@import "partials/widgets/_slideshow";
+
+
+// Third-party
+@import "vendor/_isotope";
+@import "vendor/_scrollbar";
+@import "vendor/_wpcf7"; 

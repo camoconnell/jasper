@@ -1,0 +1,92 @@
+/* 
+
+	Starting point for CSS page Transitions courtesy of;
+	http://tympanus.net/Development/PageTransitions/
+ 
+ */
+
+
+.pt-page-ontop { z-index: 999; }
+
+.pt-page-moveToLeft { 
+	@include animation( moveToLeft $duration-medium $ease-out-back both );
+}
+
+.pt-page-moveFromLeft { 
+	@include animation( moveFromLeft $duration-medium $ease-out-back both );
+}
+
+.pt-page-moveToRight {
+	@include animation( moveToRight $duration-medium $ease-out-back both );
+}
+
+.pt-page-moveFromRight {
+	@include animation( moveFromRight $duration-medium $ease-out-back both );
+}
+
+.pt-page-moveToTop {
+	@include animation( moveToTop $duration-medium $ease-out-back both );
+}
+
+.pt-page-moveFromTop {
+	@include animation( moveFromTop $duration-medium $ease-out-back both );
+}
+
+.pt-page-moveToBottom {
+	@include animation( moveToBottom $duration-medium $ease-out-back both );
+}
+
+.pt-page-moveFromBottom {
+	@include animation( moveFromBottom $duration-medium $ease-out-back both );
+}
+
+ 
+/********************************* keyframes **************************************/
+
+/* move from / to  */
+ 
+@include keyframes( moveToLeft ){ 
+	to { @include translateX(-100%); }
+}
+
+@include keyframes( moveFromLeft ){ 
+	from { @include translateX(-100%); }
+}
+
+@include keyframes( moveToRight ){ 
+	to { @include translateX(100%); }
+}  
+
+@include keyframes( moveFromRight ){ 
+	from { @include translateX(100%); }
+} 
+
+@include keyframes( moveToTop ){ 
+	to { @include translateY(-100%); }
+}  
+
+@include keyframes( moveFromTop ){ 
+	from { @include translateY(-100%); }
+}   
+
+@include keyframes( moveToBottom ){ 
+	to { @include translateY(100%); }
+}   
+ 
+@include keyframes( moveFromBottom ){ 
+	from { @include translateY(100%); }
+}  
+  
+  
+.pt-page-delay200 { 
+	@include animation-delay( 0.2s );
+}
+.pt-page-delay300 {
+	@include animation-delay( 0.3s );
+}
+.pt-page-delay400 {
+	@include animation-delay( 0.4s );
+}
+.pt-page-delay500 {
+	@include animation-delay( 0.5s );
+} 

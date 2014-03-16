@@ -1,9 +1,14 @@
 define([
-  'jquery'
-  , 'models/svg'
-], function( $ , svg ){
+	'jquery',
+	'models/svg'
+], function(
+	$,
+	svg
+){
 
-	var global = {
+	"use strict";
+
+	var config = {
 
 		// Live or Local
 		environment : WP.ENVIRONMENT,
@@ -49,5 +54,5 @@ define([
 	};   
  
 
-	return global;
+	return config;
 }); 

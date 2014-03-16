@@ -5,10 +5,7 @@
  * @package JaSper
  */
 
- 
- 
- 
- 
+
 if ( ! function_exists( 'JaSper_setup' ) ) :
 /**
  * Sets up theme defaults and registers support for various WordPress features.
@@ -82,20 +79,13 @@ function JaSper_scripts() {
     // Live or local environment.
     global $dev_environment; 
 	$dev_environment = 'Local';
-    $dest = $dev_environment === 'Live' ? '/js/require.js' : '/js/build/lib/require.js';
+    $dest = '/js/require.js';
     
- 
     wp_deregister_script('jquery');
-
     wp_enqueue_script( 'require-js', get_bloginfo('template_url').$dest, false , '20120206', true ); 
-
 	wp_enqueue_style( 'JaSper-style', get_stylesheet_uri() );
 
 
-    if( !$isMobile ) {
-        // wp_enqueue_style( 'JaSper-scroll-style', get_bloginfo('template_url').'/style.scroll.css' );
-    }
-   
     if( is_singular() )
         error_log('single',0);
     else
@@ -252,11 +242,10 @@ function add_require_path( $url )
     // if live $dev_environment don't run function
     if( $dev_environment === 'Local' ) 
     {
-        // Staging unoptimized
-        return "$url' data-main='".get_bloginfo('template_url')."/js/build/main"; 
+        // Dev unoptimized
+        return "$url' data-main='".get_bloginfo('template_url')."/js/build/app/loader";
     } else {
-
-        // Staging optimized
+        // Live optimized
         return "$url' data-main='".get_bloginfo('template_url')."/js/jasper"; 
     }
 }
@@ -307,7 +296,3 @@ class My_Walker extends Walker_Nav_Menu
         $output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
     }
 }
-
-
-
-

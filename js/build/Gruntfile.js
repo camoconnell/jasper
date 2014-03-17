@@ -4,13 +4,13 @@ module.exports = function(grunt){
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
-        buildinfo: {
+        /*buildinfo: {
             deploy: 'deploy',
             dist: 'dist',
             debug: false,
             temp: 'temp',
             env: 'local'
-        },
+        },*/
         /*compass: {
             dist: {
                 options: {
@@ -40,11 +40,9 @@ module.exports = function(grunt){
         }
     });
 
-    // Load the plugin that provides the "uglify" task.
     grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-contrib-requirejs'); 
-    // Default task(s).
-    grunt.registerTask('default', ['requirejs']);
-    // grunt.registerTask('production', 'requirejs:production');
-    // grunt.registerTask('development', 'requirejs:development');
+    grunt.loadNpmTasks('grunt-contrib-requirejs');
+    grunt.registerTask('default',[
+        'requirejs'
+    ]);
 };

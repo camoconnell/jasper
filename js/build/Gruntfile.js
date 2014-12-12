@@ -1,4 +1,4 @@
-module.exports = function(grunt){
+module.exports = function(grunt) {
 
     "use strict";
 
@@ -33,8 +33,8 @@ module.exports = function(grunt){
                     findNestedDependencies: true,
                     mainConfigFile: './app/loader.js',
                     //baseUrl       : './app',
-                    name          : 'jasper',
-                    out           : '../jasper.js'
+                    name: 'jasper',
+                    out: '../jasper.js'
                 }
             }
         }
@@ -42,7 +42,7 @@ module.exports = function(grunt){
 
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-requirejs');
-    grunt.registerTask('default',[
+    grunt.registerTask('default', [
         'requirejs'
     ]);
 };

@@ -12,15 +12,19 @@ define([
     Backbone,
     Controller,
     Router
-){
+) {
     "use strict";
-  
-    var initialize = function(){
 
-        var controller = new Controller({ el: $('body') });
+    var initialize = function() {
+
+        var controller = new Controller({
+            el: $('body')
+        });
         var onDomReady = function() {
             controller.onReady();
-            var router = new Router({'controller':controller});
+            var router = new Router({
+                'controller': controller
+            });
         };
         $(document).ready(onDomReady);
     };

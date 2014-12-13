@@ -13,6 +13,8 @@ require.config({
         // tweenmax: '../bower_components/greensock/src/uncompressed/TweenMax',
         // draggable: '../bower_components/greensock/src/uncompressed/utils/Draggable',
         lazylinepainter: '../bower_components/lazy-line-painter/jquery.lazylinepainter-1.5.0',
+        lettering: '../bower_components/Lettering.js/jquery.lettering',
+        fitVids: '../bower_components/fitvids/jquery.fitvids',
         plugins: "lib/plugins",
         text: '../bower_components/requirejs-text/text',
         templates: "../../../templates"

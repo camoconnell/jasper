@@ -6,22 +6,23 @@
     font-size: 14px;
     letter-spacing: 1px;
     position: relative;
-    
+
     margin-bottom:10px;
     height: 22px;
-    margin: 0 auto;
-    display: block; 
-    width: 500px;
+    display: inline-block;
 
-
-    @include breakpoint( 800px) { 
+    @include breakpoint( 800px) {
         width: 100%;
     }
-    svg { 
+    svg {
         display: block;
-        @include breakpoint( 800px) { 
+        @include breakpoint( 800px) {
             display: none;
         }
+    }
+
+    figure {
+        margin: 0 auto 5px;
     }
 }
 .navigation-main ul h5{
@@ -30,9 +31,9 @@
 .navigation-main ul {
     list-style: none;
     margin: 0;
-    padding-left: 0; 
+    padding-left: 0;
 }
-.navigation-main li { 
+.navigation-main li {
     float: left;
     position: relative;
     margin-right: 10px;
@@ -42,7 +43,7 @@
     font-size: 12px;
     &:nth-child(4n){width: 80px;}
 
-    @include breakpoint( 800px) { 
+    @include breakpoint( 800px) {
         letter-spacing: 2px;
         float: none;
         margin-right: 0px;
@@ -53,19 +54,20 @@
         font-size: 13px;
         padding: 17px 0 7px;
         background: url("svg/wavve01.svg") repeat-x;
-        &:first-child{ 
-            background: none; 
+        &:first-child{
+            background: none;
             padding:0 0 7px;
         }
     }
 }
 
-.navigation-main li:last-child { margin-right: 0;} 
+.navigation-main li:last-child { margin-right: 0;}
 
 .navigation-main a {
     text-decoration: none;
     display: block;
     color:#fefbf2;
+    outline: none;
 }
 .navigation-main ul ul {
     box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);

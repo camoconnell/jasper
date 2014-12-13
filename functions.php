@@ -283,7 +283,7 @@ class My_Walker extends Walker_Nav_Menu
         $attributes .= ' data-slug="'. $slug .'"';
 
         $item_output = $args->before;
-        $item_output .= '<a'. $attributes .'><div class="icon-'.$slug.'-wrap"></div><h5>';
+        $item_output .= '<a'. $attributes .'><figure></figure><h5>';
         $item_output .= $args->link_before . apply_filters( 'the_title', $item->title, $item->ID ) . $args->link_after;
         $item_output .= '</h5></a>'; /* This is where I changed things. */
         $item_output .= $args->after;

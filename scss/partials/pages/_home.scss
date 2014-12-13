@@ -34,7 +34,7 @@
 
 #home .logo-wrap {
     width: 260px;
-    margin:0 auto 70px;
+    margin:0 auto 30px;
     display: block;
     @include breakpoint( 800px) { margin:0 auto 45px; }
     @include breakpoint( 500px) { margin:0 auto 20px; }

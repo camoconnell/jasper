@@ -5,7 +5,8 @@ define([
     'backbone',
     'models/footer',
     'plugins',
-    'utils/utils'
+    'utils/utils',
+    'lettering'
 ], function(
     $,
     global,
@@ -13,7 +14,8 @@ define([
     Backbone,
     FooterModel,
     Plugins,
-    Utils
+    Utils,
+    Lettering
 ) {
 
     return Backbone.View.extend({

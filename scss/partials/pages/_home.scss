@@ -1,21 +1,21 @@
 /* =Home
 ----------------------------------------------- */
-    
-.home #content { 
+
+.home #content {
     .content-wrap {
         margin: 30px auto 140px;
         @include breakpoint(800px) { margin: 0px auto 140px; }
     }
-    
+
     border-color : $home-colour;
 }
 .home .divider,
 .home .footer-content { background-color : $home-colour; }
 .home footer svg path { fill : $home-colour; }
-  
+
 #home h1 {
     font-size: 2.4em;
-    color: $about-colour; 
+    color: $about-colour;
     letter-spacing: 0em;
     @include skew( $skew-x , -2deg );
     @include breakpoint( 500px) { font-size: 1.8em; }
@@ -28,22 +28,22 @@
         position: relative;
     }
 }
-#home .social-media-icons {  
+#home .social-media-icons {
     @include skew( $skew-x , -2deg );
 }
 
-#home .logo-wrap { 
+#home .logo-wrap {
     width: 260px;
     margin:0 auto 70px;
     display: block;
     @include breakpoint( 800px) { margin:0 auto 45px; }
     @include breakpoint( 500px) { margin:0 auto 20px; }
-} 
- 
+}
 
-#home .content { 
+
+#home .content {
     max-width: 40%;
-    margin: 10px auto;
+    margin: 10px auto 100px;
     @include breakpoint( 800px) { max-width: 65%; }
     @include breakpoint( 500px) { margin-top: 20px; max-width: 85%;}
 
@@ -66,13 +66,13 @@
 
                 &:first-letter {
                     font-size: 20px;
-                    color: $about-colour; 
+                    color: $about-colour;
                 }
             }
         }
     }
 }
- 
+
 .logo-wrap { position: relative; }
 .logo-wrap > div {
     top: 0;
@@ -86,7 +86,7 @@
     path, polygon {
         fill: $beige;
     }
-} 
+}
 
 #logo-text { z-index:1 }
 
@@ -106,7 +106,7 @@
     #menu-item-home:hover a  { color: $home-colour; }
     #menu-item-home.current-menu-item svg path ,
     #menu-item-home:hover svg path { stroke : $home-colour; }
- 
+
     // extend scroll bar
     .home .mCSB_scrollTools .mCSB_dragger:active .mCSB_dragger_bar,
     .home .mCSB_scrollTools .mCSB_dragger.mCSB_dragger_onDrag .mCSB_dragger_bar{ background: $about-colour; }

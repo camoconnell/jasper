@@ -92,9 +92,7 @@ function JaSper_scripts() {
         error_log('not single',0);
 
 
-
     $slug = get_post( $post )->post_name;
-
 
     // Localize js vars
     $args = array(
@@ -115,8 +113,6 @@ function JaSper_scripts() {
         'MOBILE'			=> $isMobile,
         'TABLET'			=> $isTablet
     );
-
-    // wp_localize_script( 'JaSper-main' , 'WP',  $args );
 
     wp_localize_script( 'require-js' , 'WP',  $args );
 }

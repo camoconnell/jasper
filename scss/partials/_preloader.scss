@@ -42,22 +42,19 @@
     }
 }
 
-/* Chrome, Safari, Opera */
-@-webkit-keyframes counter-clock {
-    from {
-        @include rotate( 0deg );
-    }
+
+@include keyframes( counter-clock ){
     to {
         @include rotate( -360deg );
     }
 }
 
-/* Standard syntax */
-@keyframes clock {
-    from {
-        @include rotate( 0deg );
-    }
+@include keyframes( clock ){
     to {
         @include rotate( 360deg );
     }
 }
+
+
+
+

@@ -1,10 +1,10 @@
 // Use Compass
-@import "compass"; 
-@import "_placeholder"; 
-@import "_breakpoints"; 
-@import "_animation"; 
+@import "compass";
+@import "_placeholder";
+@import "_breakpoints";
+@import "_animation";
 @import "_animation-delay";
-@import "_keyframes"; 
+// @import "_keyframes";
 
 // Font weights
 $light: 100;
@@ -21,9 +21,9 @@ $duration-medium: 0.6s;
 $duration-fast 	: 0.3s;
 $duration-none 	: 0s;
 
-// Colours 
+// Colours
 $beige: #fefbf2;
-$navy: #3a4284; 
+$navy: #3a4284;
 $light-blue: #747bb4;
 $dark-red: #c44545;
 
@@ -54,13 +54,13 @@ $font-size-small: .85em;
 $font-size-really-small: .6em;
 
 $skew-x: 0deg;
-$skew-y: -4deg; 
+$skew-y: -4deg;
 $skew-neg-y: 4deg; // confusing ha
 
 // Headings
 $header-font-family: 'mosq', sans-serif;
 $header-font-weight: $regular;
-$header-letter-spacing: .1em; 
+$header-letter-spacing: .1em;
 
 
 // Media Queries

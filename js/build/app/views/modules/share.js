@@ -4,21 +4,22 @@ define([
     'backbone',
     'text!templates/modules/share.html',
     'utils/utils'
-],function(
+], function(
     $,
     _,
     Backbone,
     Template,
     Utils
-){
+) {
+
     "use strict";
-     
-    var Share = Backbone.View.extend({
-        
+
+    return Backbone.View.extend({
+
         tagName: 'div',
-        
+
         className: 'social-media-icons-js',
-        
+
         my_template: _.template(Template),
 
         events: {
@@ -27,35 +28,33 @@ define([
             'click .gplus-btn-js': 'onGplusClick'
         },
 
-        initialize: function(options){
-			this.shareUrl = options.shareUrl;
-			this.twitterMsg = options.twitterMsg;
+        initialize: function(options) {
+            this.shareUrl = options.shareUrl;
+            this.twitterMsg = options.twitterMsg;
             this.render();
         },
 
-        render: function(){
+        render: function() {
             var templateData = {
-                'share_url':encodeURIComponent(this.shareUrl),
-                'twitter_msg':this.twitterMsg
+                'share_url': encodeURIComponent(this.shareUrl),
+                'twitter_msg': this.twitterMsg
             };
             this.$el.html(this.my_template(templateData));
         },
 
-        onTwitterClick:function(e){
+        onTwitterClick: function(e) {
             e.preventDefault();
-            Utils.openPopup($(e.currentTarget).attr('href'), 800,300);
+            Utils.openPopup($(e.currentTarget).attr('href'), 800, 300);
         },
 
-        onFacebookClick:function(e){
+        onFacebookClick: function(e) {
             e.preventDefault();
-            Utils.openPopup($(e.currentTarget).attr('href'), 800,300);
+            Utils.openPopup($(e.currentTarget).attr('href'), 800, 300);
         },
 
-        onGplusClick:function(e){
+        onGplusClick: function(e) {
             e.preventDefault();
-            Utils.openPopup($(e.currentTarget).attr('href'), 800,600);
+            Utils.openPopup($(e.currentTarget).attr('href'), 800, 600);
         }
     });
-    
-    return Share;
 });

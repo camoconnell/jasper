@@ -8,7 +8,7 @@ define([
     'views/pages/page',
     'views/modules/follow_me',
     'views/modules/share'
-],function(
+], function(
     $,
     global,
     _,
@@ -18,29 +18,29 @@ define([
     PageView,
     FollowMe,
     Share
-){
-    
+) {
+
     "use strict";
-      
-    var Home = PageView.extend({
+
+    return PageView.extend({
 
         model: new HomeModel(),
 
-        events:{},
+        events: {},
 
-        initialize: function( options ){
-            this.setAttributes( options );
-            _.bindAll(this);
+        initialize: function(options) {
+            this.setAttributes(options);
+            // _.bindAll(this);
         },
 
-        render : function(){
-            // Render SVG graphics 
+        render: function() {
+            // Render SVG graphics
             svg.build('logo');
 
             $("#intro h1").lettering();
 
             this.addScrollbar({
-                el : this.$el.find('.scrollpane')
+                el: this.$el.find('.scrollpane')
             });
 
             this.followMe = new FollowMe();
@@ -51,15 +51,13 @@ define([
             return this;
         },
 
-        addShareBtns:function(){
+        addShareBtns: function() {
             this.share = new Share({
-                'shareUrl':window.location,
-                'twitterMsg':'Nick Morrison Fitness - Organic Health  '
+                'shareUrl': window.location,
+                'twitterMsg': 'Nick Morrison Fitness - Organic Health  '
             });
             var $content = this.$el.find('.content');
             $content.append(this.share.el);
         }
     });
-
-    return Home;
 });

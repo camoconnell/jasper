@@ -3,71 +3,63 @@ define([
     'global',
     'underscore',
     'backbone'
-],function(
+], function(
     $,
     global,
     _,
     Backbone
-){
-    
+) {
+
     "use strict";
 
-    var BaseView = Backbone.View.extend({
+    return Backbone.View.extend({
 
-        constructor : function(){
-            // Call the original constructor
-            Backbone.View.apply(this, arguments);
-        },
-
-        
-        addInstance : function( arg ){
+        addInstance: function(arg) {
 
             this.model.addInstance({
-                hook : arg.hook,
-                enable  : arg.obj.enable,
-                disable : arg.obj.disable
+                hook: arg.hook,
+                enable: arg.obj.enable,
+                disable: arg.obj.disable
             });
         },
-      
 
-        _enable : function(){
+
+        _enable: function() {
 
             // call childs enable
-            if( this.enable ){
+            if (this.enable) {
                 this.enable();
             }
 
-            var instances = this.getter( 'instances' );
+            var instances = this.getter('instances');
 
-            $.each( instances , function(){
+            $.each(instances, function() {
                 this.enable();
             });
         },
 
 
-        _disable : function(){
+        _disable: function() {
 
             // call childs disable
-            if( this.disable ){
+            if (this.disable) {
                 this.disable();
             }
 
-            var instances = this.getter( 'instances' );
+            var instances = this.getter('instances');
 
-            $.each( instances , function(){
+            $.each(instances, function() {
                 this.disable();
             });
         },
 
-        getter : function( target ){
-            return this.model.get( target );
+        getter: function(target) {
+            return this.model.get(target);
         },
 
-        setter : function( target , value ){
-            this.model.set( target , value );
+        setter: function(target, value) {
+            this.model.set(target, value);
         }
 
     });
-    
-    return BaseView;
 });

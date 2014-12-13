@@ -1,65 +1,61 @@
+define([
+    'jquery',
+    'underscore',
+    'backbone',
+    'models/svg',
+    'plugins',
+    'models/post',
+    'utils/utils'
+], function(
+    $,
+    _,
+    Backbone,
+    svg,
+    Plugins,
+    PostModel,
+    Utils
+) {
 
-/*
-* views / pages / post
-* - - - - - - - - - - - - - -
-*/
-define([ 'jquery'
-        ,'underscore'
-        ,'backbone'
-        ,'models/svg'
-        ,'plugins'
-        ,'models/post'
-        ,'utils/utils'
-       ],function( $, _ , Backbone, svg, Plugins, PostModel, Utils) {       
-    
-    
-    //  The View the Menu 
-    
-    var Post = Backbone.View.extend({
+    return Backbone.View.extend({
 
-      model: new PostModel(),
+        model: new PostModel(),
 
-      initialize: function(){
-        _.bindAll(this); 
+        initialize: function() {
+            // _.bindAll(this);
 
-        this.render();
-      },
- 
-      render: function(){ },
+            this.render();
+        },
 
-      enable : function(){
+        render: function() {},
 
-        console.log('post enable');
+        enable: function() {
 
-        var that = this;
+            var that = this;
 
-        this.$el.on('click', '.post-wrap .continue-read', function( event ){
-          event.preventDefault();
+            this.$el.on('click', '.post-wrap .continue-read', function(event) {
+                event.preventDefault();
 
-          // find post id data
-          var $post = $(this).parents( '.post-wrap' ),
-              _id   = $post.attr('data-id');
- 
-          // send data
-          that.trigger('change:selected', { id : Number( _id ) }); 
-        })
-      },
+                // find post id data
+                var $post = $(this).parents('.post-wrap'),
+                    _id = $post.attr('data-id');
 
-      disable : function(){
+                // send data
+                that.trigger('change:selected', {
+                    id: Number(_id)
+                });
+            })
+        },
 
-        console.log('post disable');
+        disable: function() {
+            this.$el.off('click', '.post-wrap .continue-read');
+        },
 
-        this.$el.off('click', '.post-wrap .continue-read');
-      },
+        getter: function(target) {
+            return this.model.get(target);
+        },
 
-      getter : function( target ){ 
-        return this.model.get( target );
-      },
-
-      setter : function( target , value ){ 
-        this.model.set( target , value );
-      } 
+        setter: function(target, value) {
+            this.model.set(target, value);
+        }
     });
-
-    return Post;
 });

@@ -7,7 +7,7 @@ define([
     'plugins',
     'views/pages/page',
     'views/modules/follow_me'
-],function(
+], function(
     $,
     global,
     _,
@@ -16,29 +16,32 @@ define([
     Plugins,
     PageView,
     FollowMe
-){
+) {
+
     'use strict';
 
-    var Training = PageView.extend({
+    return PageView.extend({
 
-        initialize: function(options){
+        initialize: function(options) {
             this.setAttributes(options);
-            _.bindAll(this);
+            // _.bindAll(this);
         },
 
-        render : function(){ 
+        render: function() {
             this.motifs();
-            this.addScrollbar({el:this.$el.find('.scrollpane')});
+            this.addScrollbar({
+                el: this.$el.find('.scrollpane')
+            });
             this.followMe = new FollowMe();
             this.$el.append(this.followMe.el);
             return this;
-        }, 
+        },
 
-        onscroll : function (scrollTop, scrollDirection) { },
+        onscroll: function(scrollTop, scrollDirection) {},
 
-        onresize : function () { },
+        onresize: function() {},
 
-        motifs:function(){
+        motifs: function() {
             $('#one').lazylinepainter({
                 "svgData": global.misc.lazylinedata,
                 "strokeWidth": 2,
@@ -50,8 +53,6 @@ define([
                 "strokeWidth": 2,
                 "strokeColor": "#fefbf2"
             }).lazylinepainter('paint');
-        } 
+        }
     });
-    
-    return Training;
 });

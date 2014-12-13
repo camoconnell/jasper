@@ -3,32 +3,30 @@ define([
     'underscore',
     'backbone',
     'text!templates/modules/follow_me.html'
-],function(
+], function(
     $,
     _,
     Backbone,
     Template
-){
+) {
     "use strict";
-     
-    var FollowMe = Backbone.View.extend({
-        
+
+    return Backbone.View.extend({
+
         tagName: 'div',
-        
+
         className: 'follow-me-js',
-        
+
         my_template: _.template(Template),
 
         events: {},
 
-        initialize: function(options){
+        initialize: function(options) {
             this.render();
         },
 
-        render: function(){
+        render: function() {
             this.$el.html(this.my_template());
         }
     });
-    
-    return FollowMe;
 });

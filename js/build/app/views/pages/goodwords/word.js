@@ -3,30 +3,31 @@ define([
     'underscore',
     'backbone',
     'text!templates/pages/goodwords/word.html'
-],function(
+], function(
     $,
     _,
     Backbone,
     Template
-){
+) {
+
     "use strict";
-     
-    var Skills = Backbone.View.extend({
-        
+
+    return Backbone.View.extend({
+
         tagName: 'div',
-        
+
         className: 'word skew',
 
         my_template: _.template(Template),
 
-        initialize: function(options){
+        initialize: function(options) {
             this.render(options.data);
         },
 
-        render: function(data){
-            this.$el.html( this.my_template({'data':data}));
+        render: function(data) {
+            this.$el.html(this.my_template({
+                'data': data
+            }));
         }
     });
-    
-    return Skills;
 });

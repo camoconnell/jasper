@@ -6,7 +6,7 @@ define([
     'views/pages/page',
     'views/pages/goodwords/word',
     'views/modules/follow_me'
-],function(
+], function(
     $,
     _,
     Backbone,
@@ -14,20 +14,20 @@ define([
     PageView,
     WordsView,
     FollowMe
-){
-    
+) {
+
     "use strict";
 
-    var Goodwords = PageView.extend({
+    return PageView.extend({
 
-        initialize: function( options ){
-            this.setAttributes( options );
-            _.bindAll(this);
+        initialize: function(options) {
+            this.setAttributes(options);
+            // _.bindAll(this);
         },
 
-        render : function( options ){
+        render: function(options) {
             this.addScrollbar({
-                el : this.$el.find('.scrollpane')
+                el: this.$el.find('.scrollpane')
             });
 
             this.appendWords();
@@ -35,15 +35,15 @@ define([
             this.$el.append(this.followMe.el);
         },
 
-        appendWords: function(options){
+        appendWords: function(options) {
             var acf = this.model.get('acf');
             var $words = this.$el.find('.words-js');
-            _.each(acf.good_words, function(wordData){
-                var words = new WordsView({data:wordData});
+            _.each(acf.good_words, function(wordData) {
+                var words = new WordsView({
+                    data: wordData
+                });
                 $words.append(words.el);
             });
         },
     });
-
-    return Goodwords;
 });

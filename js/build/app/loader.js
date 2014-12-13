@@ -5,23 +5,26 @@ require.config({
     baseUrl: WP.THEME_URL + "/js/build/app",
 
     paths: {
-        "global": "config",
-        "jquery": "lib/jquery-2.1.0",
-        "underscore": "lib/underscore-min",
-        "backbone": "lib/backbone",
-        "plugins": "lib/plugins",
-        "text": "lib/text",
-        "templates": "../../../templates"
+        global: "config",
+        jquery: '../bower_components/jquery/dist/jquery',
+        backbone: '../bower_components/backbone/backbone',
+        underscore: '../bower_components/underscore/underscore',
+        // handlebars: '../bower_components/handlebars/handlebars',
+        // tweenmax: '../bower_components/greensock/src/uncompressed/TweenMax',
+        // draggable: '../bower_components/greensock/src/uncompressed/utils/Draggable',
+        plugins: "lib/plugins",
+        text: '../bower_components/requirejs-text/text',
+        templates: "../../../templates"
     },
 
     shim: {
-        "underscore": {
+        underscore: {
             "exports": "_"
         },
-        "jquery": {
+        jquery: {
             "exports": "$"
         },
-        "backbone": {
+        backbone: {
             "deps": ["jquery", "underscore"],
             "exports": "Backbone"
         }

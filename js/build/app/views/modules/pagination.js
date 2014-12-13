@@ -5,74 +5,73 @@ define([
     'backbone',
     'models/modules/pagination',
     'plugins'
-],function(
+], function(
     $,
     global,
     _,
     Backbone,
     PaginationModel,
     Plugins
-){
+) {
+
     "use strict";
 
-    var PaginationView = Backbone.View.extend({
+    return Backbone.View.extend({
 
         model: new PaginationModel(),
- 
-        initialize: function(){
-            _.bindAll(this);
+
+        initialize: function() {
+            // _.bindAll(this);
         },
 
-        render:function(postCount){
- 
+        render: function(postCount) {
+
             var maxNumOfPosts = global.bootstrap.numOfPosts;
             var numOfPages = postCount / maxNumOfPosts;
 
-            numOfPages = ( numOfPages < 1 ) ?  1 : Math.ceil( numOfPages );
+            numOfPages = (numOfPages < 1) ? 1 : Math.ceil(numOfPages);
 
             // page count relative to category selected
-            this.setter( 'numOfPages', numOfPages );
+            this.setter('numOfPages', numOfPages);
 
             // reset page index to the first page
-            this.setter( 'pageIndex' , 1 );
+            this.setter('pageIndex', 1);
 
             this.update();
         },
 
 
-        update : function(){
+        update: function() {
 
-            var pageIndex   = this.getter( 'pageIndex' ),
-                numOfPages  = this.getter( 'numOfPages');
+            var pageIndex = this.getter('pageIndex'),
+                numOfPages = this.getter('numOfPages');
 
-            if( numOfPages  >  1 && pageIndex !== numOfPages )
+            if (numOfPages > 1 && pageIndex !== numOfPages)
                 this.$el.css('opacity', 1);
             else
                 this.$el.css('opacity', 0);
         },
 
 
-        load : function(){
+        load: function() {
 
-            var pageIndex   = this.getter( 'pageIndex' ),
-                numOfPages  = this.getter( 'numOfPages');
- 
-            if( pageIndex < numOfPages ){
-                pageIndex++; 
-                this.setter( 'pageIndex' , pageIndex );
-            } 
-        },
- 
-        
-        getter : function( value ){ 
-            return this.model.get( value );
+            var pageIndex = this.getter('pageIndex'),
+                numOfPages = this.getter('numOfPages');
+
+            if (pageIndex < numOfPages) {
+                pageIndex++;
+                this.setter('pageIndex', pageIndex);
+            }
         },
 
-        setter : function( target , value ){ 
-            this.model.set( target , value );
+
+        getter: function(value) {
+            return this.model.get(value);
+        },
+
+        setter: function(target, value) {
+            this.model.set(target, value);
         }
 
     });
-
-    return PaginationView;
 });

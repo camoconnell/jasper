@@ -7,7 +7,7 @@ define([
     'plugins',
     'models/modules/category/listItem',
     'utils/utils'
-],function(
+], function(
     $,
     global,
     _,
@@ -16,91 +16,91 @@ define([
     Plugins,
     CategorylistItemModel,
     Utils
-){
+) {
+
     "use strict";
 
-    var CategoryWidgetItem = Backbone.View.extend({
+    return Backbone.View.extend({
 
         model: new CategorylistItemModel(),
 
         tagName: 'div',
 
         attributes: {
-            class:  "listItem"
+            class: "listItem"
         },
 
-        events : {
-            'click .hitArea'       : 'onSelect',
-            'mouseover .hitArea'   : 'onMouseover',
-            'mouseout  .hitArea'   : 'onMouseout'
+        events: {
+            'click .hitArea': 'onSelect',
+            'mouseover .hitArea': 'onMouseover',
+            'mouseout  .hitArea': 'onMouseout'
         },
- 
-        initialize: function(){
-            _.bindAll(this);
+
+        initialize: function() {
+            _.bindAll(this,
+                'update'
+            );
             this.$el.append('<div class="hitArea"></div>');
-            this.$el.attr('id','icon-'+this.model.get('slug'));
+            this.$el.attr('id', 'icon-' + this.model.get('slug'));
             // Render on content change
-            this.listenTo( this.model , 'change:current' , this.update );
+            this.listenTo(this.model, 'change:current', this.update);
             this.render();
         },
 
-        update : function (e) {
-            if(e.get('selected')){
+        update: function(e) {
+            if (e.get('selected')) {
                 this.onMouseover();
-            }else{
+            } else {
                 this.onMouseout();
             }
         },
 
-        render: function(){
-            $('.categoryWidget .categories').append( this.$el );
+        render: function() {
+            $('.categoryWidget .categories').append(this.$el);
             this.buildIcon();
         },
- 
-        buildIcon : function () {
+
+        buildIcon: function() {
             this.$el.lazylinepainter({
-                'svgData' : global.misc.lazylinedata,
-                'strokeWidth':1.5,
-                'strokeColor':'#fefbf2'
+                'svgData': global.misc.lazylinedata,
+                'strokeWidth': 1.5,
+                'strokeColor': '#fefbf2'
             }).lazylinepainter('paint');
         },
 
-        onSelect : function () {
+        onSelect: function() {
             this.setCurrent();
         },
 
-        setCurrent:function(){
+        setCurrent: function() {
             var that = this;
-            this.setter( 'current', true );
+            this.setter('current', true);
 
-            setTimeout(function(){
+            setTimeout(function() {
                 that.$el.addClass('selected');
-            },2000);
+            }, 2000);
         },
 
-        onMouseover : function(){
-            if( !this.getter('current') ){
-                this.setter( 'mouseover' , true );
+        onMouseover: function() {
+            if (!this.getter('current')) {
+                this.setter('mouseover', true);
                 this.$el.addClass('selected');
             }
         },
 
-        onMouseout : function(){
-            if( !this.getter('current') ){
-                this.setter( 'mouseover' , false );
+        onMouseout: function() {
+            if (!this.getter('current')) {
+                this.setter('mouseover', false);
                 this.$el.removeClass('selected');
             }
         },
 
-        setter : function( target , value ){
-            this.model.set( target , value );
+        setter: function(target, value) {
+            this.model.set(target, value);
         },
 
-        getter : function( target ){
-            return this.model.get( target );
+        getter: function(target) {
+            return this.model.get(target);
         }
     });
-
-    
-    return CategoryWidgetItem;
 });

@@ -1,11 +1,18 @@
-define(function(require) {
-
-    var $ = require("jquery"),
-        global = require("global"),
-        _ = require("underscore"),
-        Backbone = require("backbone"),
-        MenuItemModel = require('models/MenuItem');
-
+define([
+    'jquery',
+    'global',
+    'underscore',
+    'backbone',
+    'models/MenuItem',
+    'lazylinepainter'
+], function(
+    $,
+    global,
+    _,
+    Backbone,
+    MenuItemModel,
+    lazylinepainter
+) {
 
     return Backbone.View.extend({
 

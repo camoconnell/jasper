@@ -12,6 +12,7 @@ require.config({
         // handlebars: '../bower_components/handlebars/handlebars',
         // tweenmax: '../bower_components/greensock/src/uncompressed/TweenMax',
         // draggable: '../bower_components/greensock/src/uncompressed/utils/Draggable',
+        lazylinepainter: '../bower_components/lazy-line-painter/jquery.lazylinepainter-1.5.0',
         plugins: "lib/plugins",
         text: '../bower_components/requirejs-text/text',
         templates: "../../../templates"
@@ -27,6 +28,9 @@ require.config({
         backbone: {
             "deps": ["jquery", "underscore"],
             "exports": "Backbone"
+        },
+        lazylinepainter: {
+            "deps": ["jquery"]
         }
     }
 });

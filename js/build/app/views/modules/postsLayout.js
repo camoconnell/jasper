@@ -23,7 +23,12 @@ define([
         initialize: function(options) {
 
             _.bindAll(this,
-                'calcColWidth'
+                'calcColWidth',
+                'updateLayout',
+                'enable',
+                'disable',
+                'onresize',
+                'changeColCnt'
             );
 
             this.$reLayoutBtn = options.reLayoutBtn;
@@ -111,9 +116,9 @@ define([
 
         changeColCnt: function() {
 
-            var w = this.$el.width(),
-                columnInfo = this.model.get('columnInfo'),
-                that = this;
+            var w = this.$el.width();
+            var columnInfo = this.model.get('columnInfo');
+            var that = this;
 
             $.each(columnInfo, function(key, value) {
 

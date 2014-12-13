@@ -45,7 +45,8 @@ define([
                 'onPostSelected',
                 'onPaginateChange',
                 'onPostsDone',
-                'onPostsFail'
+                'onPostsFail',
+                'onCategoryWidgetLoaded'
             );
 
             this.setAttributes(options);

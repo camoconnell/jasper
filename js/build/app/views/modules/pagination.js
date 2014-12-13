@@ -21,7 +21,9 @@ define([
         model: new PaginationModel(),
 
         initialize: function() {
-            // _.bindAll(this);
+            _.bindAll(this,
+                'load'
+            );
         },
 
         render: function(postCount) {
@@ -55,8 +57,8 @@ define([
 
         load: function() {
 
-            var pageIndex = this.getter('pageIndex'),
-                numOfPages = this.getter('numOfPages');
+            var pageIndex = this.getter('pageIndex');
+            var numOfPages = this.getter('numOfPages');
 
             if (pageIndex < numOfPages) {
                 pageIndex++;

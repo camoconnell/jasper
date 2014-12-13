@@ -66,12 +66,11 @@ define([
         },
 
         render: function() {
-            this.$el.find('a').lazylinepainter({
+            this.$el.find('figure').lazylinepainter({
                 'svgData': global.misc.lazylinedata,
                 'strokeWidth': 1.5,
                 'strokeColor': '#fefbf2',
                 'overrideKey': 'icon-' + this.model.get('slug'),
-                'width': 'auto',
                 'delay': this.model.get('delay')
             }).lazylinepainter(global.misc.applyline);
 

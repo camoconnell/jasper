@@ -33,7 +33,9 @@ define([
         initialize: function(options) {
 
             _.bindAll(this,
-                'onCollectionLoaded'
+                'onCollectionLoaded',
+                'disable',
+                'enable'
             );
 
             this.model.set('category', options.category);

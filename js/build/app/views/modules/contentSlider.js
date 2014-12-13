@@ -3,13 +3,15 @@ define([
     'global',
     'underscore',
     'backbone',
-    'text!templates/modules/content_slider.html'
+    'text!templates/modules/content_slider.html',
+    'fitVids'
 ], function(
     $,
     global,
     _,
     Backbone,
-    Template
+    Template,
+    fitVids
 ) {
 
     "use strict";

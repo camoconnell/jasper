@@ -1,8 +1,8 @@
 /* =Preloader
 ----------------------------------------------- */
 .preloader {
-    left: 50%; 
-    top: 50%; 
+    left: 50%;
+    top: 50%;
     margin: -60px 0 0 -60px;
     position: absolute;
     z-index: 9999;
@@ -22,78 +22,42 @@
         z-index:0;
         width: 120px;
         height: 120px;
-        border: $base-border;    
+        border: $base-border;
         @include apply-origin( 50% 50%, true );
         @include animation( counter-clock  16s  linear both  );
 
-        .inner-box{ 
+        .inner-box{
             width: 100px;
-            height: 100px; 
-            left: 50%; 
-            top: 50%; 
+            height: 100px;
+            left: 50%;
+            top: 50%;
             margin: -50px 0 0 -50px;
-            position: absolute; 
-            background: $beige; 
-            overflow: hidden; 
-         
+            position: absolute;
+            background: $beige;
+            overflow: hidden;
+
             @include apply-origin( 50% 50%, true );
             @include animation( counter-clock  16s  linear both  );
         }
     }
 }
 
-
-@include keyframes( counter-clock ){ 
+/* Chrome, Safari, Opera */
+@-webkit-keyframes counter-clock {
+    from {
+        @include rotate( 0deg );
+    }
     to {
-        @include rotate( -360deg ); 
+        @include rotate( -360deg );
     }
 }
 
-@include keyframes( clock ){ 
+/* Standard syntax */
+@keyframes clock {
+    from {
+        @include rotate( 0deg );
+    }
     to {
-        @include rotate( 360deg ); 
+        @include rotate( 360deg );
     }
 }
-
-
-
-.workout {
-    z-index: 100;
-    top: 26px;
-    left: 21px;
-    position: absolute;
-    overflow: hidden;
-    height: 130px;
-    width: 120px;
-} 
-
- 
-/* sprite tile dimensions */
-$spriteWidth:113.5px; 
-
-/* 
- * mixins 
-*/  
-@mixin anim($animName, $steps, $animParams){
-    .#{$animName} { 
-        @content;
-        @include animation($animName steps($steps) $animParams); 
-    }
-    @include keyframes($animName) {
-        from { left:0px }
-          to { left:-($spriteWidth * $steps) }
-    }
-}
-
-
-
-.workout .sprite {
-    top:0;
-    left:0;
-    position: absolute; 
-}
-
-@include anim($animName:dumb, $steps:8, $animParams:1s infinite);
-
- 
-

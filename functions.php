@@ -79,7 +79,7 @@ function JaSper_scripts() {
     // Live or local environment.
     global $dev_environment;
 	$dev_environment = 'Local';
-    $dest = '/js/require.js';
+    $dest = '/js/app/bower_components/requirejs/require.js';
 
     wp_deregister_script('jquery');
     wp_enqueue_script( 'require-js', get_bloginfo('template_url').$dest, false , '20120206', true );
@@ -239,10 +239,10 @@ function add_require_path( $url )
     if( $dev_environment === 'Local' )
     {
         // Dev unoptimized
-        return "$url' data-main='".get_bloginfo('template_url')."/js/build/app/loader";
+        return "$url' data-main='".get_bloginfo('template_url')."/js/dist/loader";
     } else {
         // Live optimized
-        return "$url' data-main='".get_bloginfo('template_url')."/js/jasper";
+        return "$url' data-main='".get_bloginfo('template_url')."/js/dist/loader";
     }
 }
 add_filter( 'clean_url', 'add_require_path', 11, 1 );

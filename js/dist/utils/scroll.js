@@ -1,0 +1,1 @@
+define(["jquery"],function(e){var t=[],n=0,r=e(this).scrollTop(),s=function(){r=e(this).scrollTop();for(i=0;i<t.length;i++){var s=t[i];if(s.start&&r<s.start)continue;if(s.end&&r>s.end)continue;if(s.condition&&!s.condition(r,n))continue;s.callback(r,n)}};return{update:s,add:function(e){t.push(e)}}});

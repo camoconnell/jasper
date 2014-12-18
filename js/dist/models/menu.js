@@ -1,0 +1,1 @@
+define(["underscore","backbone"],function(e,t){var n=t.Model.extend({defaults:{selected:!1,slug:"",pageId:0,idAttr:"",delay:0,sayhi:"closed"}});return n});

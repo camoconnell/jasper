@@ -1,0 +1,1 @@
+define(["underscore","global","backbone"],function(e,t,n){"use strict";return n.Model.extend({defaults:{maxNumOfPosts:t.bootstrap.numOfPosts,numOfPages:1,pageIndex:1}})});

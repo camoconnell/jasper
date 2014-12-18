@@ -1,0 +1,1 @@
+define(["underscore","backbone"],function(e,t){"use strict";return t.Model.extend({defaults:{current:!1,title:null,business:null,description:null,dateTo:null,dateFrom:null,location:null}})});

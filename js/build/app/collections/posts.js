@@ -14,37 +14,27 @@ define([
     var PostCollection = Backbone.Collection.extend({
 
         model: PostModel,
-        url_querystring: null,
 
         initialize: function() {
             //this.on("change:current",this.changeSelected);
         },
 
-        setQueryString: function(category) {
-            var intRegex = /^\d+$/;
-            if (intRegex.test(category)) {
-                this.url_querystring = '?id=' + category;
-            } else {
-                this.url_querystring = '?slug=' + category;
-            }
-        },
-
         url: function() {
-            return '/api/core/get_category_posts/' + this.url_querystring;
+            return '/api/core/get_category_posts/';
         },
 
         parse: function(results) {
+            this.numOfPages = results.pages;
             return _.map(results.posts, this.applyFilter, this);
         },
 
         applyFilter: function(results) {
-            var slides = this.getSlides(results.acf);
             return {
                 id: results.id,
                 slug: results.slug,
                 url: results.url,
                 title: results.title,
-                slides: slides,
+                slides: this.getSlides(results.acf),
                 content: results.acf.copy,
                 excerpt: this.getExcerpt(results.acf.copy),
                 acf: results.acf,

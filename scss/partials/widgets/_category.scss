@@ -10,20 +10,20 @@
     position: absolute;
     background: rgba(58, 66, 132,0.4);
     overflow: hidden;
-    
+
     @include transition( width  $duration-slow $easing );
     @include breakpoint( $mq-large ) { width: 50%; }
-    @include breakpoint( 1030px) {  width: 100%; } 
+    @include breakpoint( 1030px) {  width: 100%; }
 
     .categories {
-        width: 30%;
+        width: 31%;
         position: relative;
         border-right: $base-border;
         float: left;
         height: 120px;
         border-top: none;
         margin-top: 0px;
-        @include breakpoint( $mq-small ) { 
+        @include breakpoint( $mq-small ) {
             width: 100%;
             border-right: none;
             height:80px;
@@ -32,14 +32,14 @@
         }
 
         .listItem{ position: absolute; }
-        .listItem svg path { 
+        .listItem svg path {
             fill : $beige;
             @include transition( fill 400ms linear );
             @include transition( stroke 400ms linear );
         }
-        .listItem.selected svg path { 
-            fill : $journal-colour; 
-            stroke : $journal-colour; 
+        .listItem.selected svg path {
+            fill : $journal-colour;
+            stroke : $journal-colour;
         }
     }
 }
@@ -48,17 +48,17 @@
         .categoryWidget .categories .listItem:nth-child(3) { top: 50%; left: 54%; }
         .categoryWidget .categories .listItem:nth-child(4) { bottom: 0; left: 0; }
         .categoryWidget .categories .listItem:nth-child(5) { bottom:0; right: 0;}
-        .categoryWidget .categories .listItem:nth-child(6) { top: 2%; right: 3%; } 
+        .categoryWidget .categories .listItem:nth-child(6) { top: 2%; right: 3%; }
 
 .categoryWidget .description {
-    width: 70%;
+    width: 69%;
     padding: 0 36px 0 8px;
     float: left;
     position: relative;
     height: 120px;
-    overflow: hidden; 
+    overflow: hidden;
     z-index: 0;
-    @include breakpoint( $mq-small ) { 
+    @include breakpoint( $mq-small ) {
         width: 100%;
         height: auto;
         position: absolute;
@@ -69,7 +69,7 @@
 }
 
     .categoryWidget .mover{
-        width: 70%;
+        width: 69%;
         padding: 5px 5px 5px 8px;
         z-index: 10;
         right: 0;
@@ -82,12 +82,12 @@
 
     .categoryWidget .mover{ @include transition-duration( $duration-fast ); }
     .categoryWidget .mover.delay{ @include transition-delay( $duration-medium ); }
-    .categoryWidget .mover.display  { top:0; } 
+    .categoryWidget .mover.display  { top:0; }
 
         .categoryWidget .description .info{
             width: 100%;
             height: 120px;
-            @include breakpoint( $mq-small ) { 
+            @include breakpoint( $mq-small ) {
                 height: auto;
             }
         }
@@ -100,7 +100,7 @@
             }
 
             .categoryWidget  p{
-                color: $beige; 
+                color: $beige;
                 text-align: left;
                 text-align: left;
                 position: relative;
@@ -124,12 +124,12 @@
         width: 34px;
         position: absolute;
         height: 34px;
-        display:block; 
+        display:block;
         z-index: 1;
 
         @include breakpoint( 1120px ) { display:none; }
     }
- 
+
         .categoryWidget .layout.hide { display: none }
 
         .categoryWidget  .block {
@@ -138,9 +138,9 @@
 
         .categoryWidget .block {
             border: 1px solid $journal-colour;
-            background-color: rgba( 253 , 106 , 98 , 0 ); 
-        }   
- 
+            background-color: rgba( 253 , 106 , 98 , 0 );
+        }
+
         .categoryWidget .layout .small,
         .categoryWidget .layout .large { display : none; }
         .categoryWidget .layout .display { display : block; }

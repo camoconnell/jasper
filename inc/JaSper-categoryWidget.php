@@ -12,7 +12,7 @@
                 <div class="clear"></div>
             </div>
 			<div class="edge"></div>
-		</div>						
+		</div>
 	</div>
 
 	<div class="description">
@@ -20,31 +20,5 @@
 			<h2>&nbsp;</h2>
 			<p>&nbsp;</p>
 		</div>
-	</div>
-
-	<div class="layout">
-		<div class="small display">
-			<div class="top">
-				<div class="block"></div>
-				<div class="block"></div>
-				<div class="block"></div>
-			</div>
-			<div class="bottom">
-				<div class="block"></div>
-				<div class="block"></div>
-				<div class="block"></div>
-			</div>
-		</div>
-		<div class="large">
-			<div class="top">
-				<div class="block"></div>
-				<div class="block"></div>
-			</div>
-			<div class="bottom">
-				<div class="block"></div>
-				<div class="block"></div>
-			</div>
-		</div>
-		<div class="hitArea"></div>
 	</div>
 </section>

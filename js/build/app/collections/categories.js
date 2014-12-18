@@ -8,53 +8,48 @@ define([
     global,
     Backbone,
     CategorylistItemModel
-){
-    "use strict";
+) {
 
-	var CategoryWidgetCollection = Backbone.Collection.extend({
+    'use strict';
+
+    return Backbone.Collection.extend({
 
         model: CategorylistItemModel,
 
-        initialize : function(models, options) {
-            this.on( "change:current", this.changeSelected );
+        initialize: function(models, options) {
+            this.on("change:current", this.changeSelected);
         },
 
-        url : function() {
-            return global.url+'/?json=get_category_index';
+        url: function() {
+            return global.url + '/?json=get_category_index';
         },
 
-        parse : function(data) {
-            var filteredResults = this.filterResults( data );
-            return filteredResults;
+        parse: function(data) {
+            return this.filterCategories(data.categories);
         },
 
-        filterResults: function( results ) {
-            var filteredResults = [];
-            _.each( results.categories, function(category){
-                filteredResults.push({
-                    catId		: category.id,
-                    slug		: category.slug,
-                    title   : category.title,
-                    description	: category.description,
-                    post_count  : category.post_count,
-                    current : false
-                });
+        filterCategories: function(categories) {
+            return _.map(categories, function(category) {
+                return {
+                    catId: category.id,
+                    slug: category.slug,
+                    title: category.title,
+                    description: category.description,
+                    post_count: category.post_count,
+                    current: false
+                };
             });
-            return filteredResults;
         },
 
-        changeSelected: function( model, val){
+        changeSelected: function(model, val) {
             var that = this;
-            if( val ){
-                this.each( function( e ){
-                    if( e !== model && e.get( "current" ) ){
-                        e.set( "current", false );
-                        console.log(e);
+            if (val) {
+                this.each(function(e) {
+                    if (e !== model && e.get("current")) {
+                        e.set("current", false);
                     }
                 });
             }
         }
     });
-
-    return CategoryWidgetCollection;
 });

@@ -6,17 +6,16 @@ define([
     _,
     global,
     Backbone
-){
+) {
+
     "use strict";
 
-    var PaginationModel = Backbone.Model.extend({
-        defaults:{
+    return Backbone.Model.extend({
+        defaults: {
             // set on Wordpress @ Settings > Reading
-            maxNumOfPosts  : global.bootstrap.numOfPosts,
-            numOfPages  : 1,
-            pageIndex   : 1
+            maxNumOfPosts: global.bootstrap.numOfPosts,
+            numOfPages: 1,
+            pageIndex: 1
         }
     });
-    
-    return PaginationModel;
 });

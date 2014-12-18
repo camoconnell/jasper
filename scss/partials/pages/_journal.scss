@@ -1,6 +1,6 @@
    /* =Journal / Category
------------------------------------------------ */  
- 
+----------------------------------------------- */
+
 .journal #content { border-color : $journal-colour; }
 .journal .divider,
 .journal .footer-content { background-color : $journal-colour; }
@@ -8,13 +8,13 @@
 .journal #logo-cam svg path { fill : $beige; }
 
 
-#journal {   
+#journal {
     margin: 0 auto 200px;
     width: 85%;
-} 
+}
 
-#content section#journal > .inner { 
-    margin-top: 110px; 
+#content section#journal > .inner {
+    margin-top: 110px;
     @include breakpoint( $mq-small ) { margin-top: 40px;}
     @media screen and (max-height: 400px) { margin-top: 40px;}
 }
@@ -23,192 +23,265 @@
     margin-left: -43%;
     width: 86%;
 
-    @include breakpoint( $mq-small ) { 
+    @include breakpoint( $mq-small ) {
         margin-left: -47.5%;
         width: 95%;
     }
 }
 
-#journal .content { 
-    max-width: 86%; 
+#journal .content {
+    max-width: 86%;
     margin: 30px auto;
     top: 0;
 
-    @include breakpoint( $mq-small ) { 
+    @include breakpoint( $mq-small ) {
         margin: 15px auto;
         max-width: 95%;
     }
-} 
+}
 #journal .cat-wrap {
-    position: absolute; 
-    width: 100%; 
+    position: absolute;
+    width: 100%;
     top:0;
     left:0;
 }
- 
-#posts-wrap a { color: $dark-red; }
-#posts-wrap { 
+
+
+
+#posts-wrap {
+
     min-height: 150px;
-    opacity:0; 
-    margin:0; 
+    margin:0;
     margin-bottom:10em;
-}
-#posts-wrap .post-wrap { 
-    float: left; 
-    list-style: none;
-    margin-bottom:200px;
-    padding-right: 10px; 
-} 
-#posts-wrap  .post-inner { 
-    position: relative; 
-    min-height: 375px; 
-    background: $beige;
-    @include breakpoint( $mq-small ) { min-height:0 }
-}
-#posts-wrap .share-small { margin-top: 7px; }  
- 
-#posts-wrap .whole:nth-child(1),
-#posts-wrap .half:nth-child(2),
-#posts-wrap .third:nth-child(2) {  
-    margin-top: 150px;
-    @include breakpoint( $mq-small ) { 
-        margin-top: 132px;
-    }
-}
-#posts-wrap .third:nth-child(3) {  margin-top: 300px }
 
-#posts-wrap .whole { 
-    margin-bottom: 70px;
-    @include breakpoint( $mq-small ) { 
-        margin-bottom: 30px;
+    a {
+        color: $dark-red;
     }
-}
 
-#posts-wrap .whole,
-#posts-wrap .half:nth-child(even),
-#posts-wrap .third:nth-child(3n) {  padding-right: 0px }
-
-#posts-wrap p { 
-    margin: 5px 0; 
-    color: $navy; 
-    margin-top: 0;
-    font-size: $font-size-small;
-    @include breakpoint( $mq-small ) { 
-        font-size: 13px;
-        line-height: 20px;
-    }
-}
-#posts-wrap .post-wrap:last-child { margin-bottom: 20px } 
-
-#posts-wrap .button { margin: 0 5px;  height: 20px}
-#posts-wrap .button:first-child {margin-left:0}
-#posts-wrap .button:last-child {margin-right:0}
-#posts-wrap .button { margin: 0 5px;  height: 20px}
-#posts-wrap .button h4 {font-size: $font-size-really-small; }
-#posts-wrap .social-media-icons { 
-    left: 50%;
-    bottom: 0; 
-    position: relative; 
-    height: 22px; 
-    width: 272px; 
-    margin:5px 0 8px -135px;
-    display: block;
-    @include skew( $skew-x , -4deg );
-    @include breakpoint( $mq-small ) { display: none }
-
-    .button h4 {
-        padding: 3px 0px;
-    }
-}
-#posts-wrap .bottom-nav-wrap {
-    .continue-read {
-        display: block;
-        background: #f9f5e8;
-        padding: 13px;
-        text-decoration: none;
-        h3 { color: $about-colour; }
-    }
-    svg {
-        margin-bottom: -6px;
-        path {
-            fill: #f9f5e8;
+    p {
+        margin: 5px 0;
+        color: $navy;
+        margin-top: 0;
+        font-size: $font-size-small;
+        @include breakpoint( $mq-small ) {
+            font-size: 13px;
+            line-height: 20px;
         }
     }
-}
 
-.whole {width:100%}
-.half { width:49.9%} 
-.third {width:32.9%}
-.quarter {width:24.9%}
-.fifth {width:19.9%}
-.three-quarters{width:74.9%}
+    .button {
+        margin: 0 5px;
+        height: 20px;
 
-.whole .post-title-inner,
-.half .post-title-inner {
-    font-size: $font-size-really-large;
-    @include breakpoint( $mq-small ) { 
-        font-size: 1em;
+        h4 {
+            font-size: $font-size-really-small;
+        }
+
+        &:first-child {
+            margin-left:0
+        }
+
+        &:last-child {
+            margin-right:0
+        }
     }
-} 
 
-#posts-wrap .media { position: relative; }
+    .copy-wrap {position: relative; }
+    .copy {
+        overflow: hidden;
+        height: 140px;
+        padding: 6px 50px;
+        z-index: 2;
+        position: relative;
 
-#posts-wrap .copy-wrap {position: relative; }
-#posts-wrap .copy { 
-    overflow: hidden; 
-    height: 140px; 
-    padding: 6px 50px; 
-    z-index: 2; 
-    position: relative;
-
-    @include breakpoint( $mq-small ) { 
-        padding: 16px 20px 0;
-        height: auto;
+        @include breakpoint( $mq-small ) {
+            padding: 16px 20px 0;
+            height: auto;
+        }
     }
 
     &:first-letter {
         color: $navy;
     }
-}
- 
 
-.post-img  {
-    overflow:hidden;
-    padding-bottom: 43%; /* 16:9 */
-    // padding-bottom: 56%; /* 16:9 */
-    position: relative;
-    @include breakpoint( $mq-small ) { 
-        padding-bottom: 50%;
+    .post-inner {
+        position: relative;
+        min-height: 375px;
+        background: $beige;
+        @include breakpoint( $mq-small ) { min-height:0 }
+    }
+
+    .share {
+        width:20px;
+        height:16px;
+        background:url(images/share.png);
+        display:block;
+        float: right;
+        margin-top: 3px;
+    }
+
+    .share-small {
+        margin-top: 7px;
+    }
+
+    .social-media-icons {
+        left: 50%;
+        bottom: 0;
+        position: relative;
+        height: 22px;
+        width: 272px;
+        margin:5px 0 8px -135px;
+        display: block;
+        @include skew( $skew-x , -4deg );
+        @include breakpoint( $mq-small ) { display: none }
+
+        .button h4 {
+            padding: 3px 0px;
+        }
+    }
+
+    .bottom-nav-wrap {
+        .continue-read {
+            display: block;
+            background: #f9f5e8;
+            padding: 13px;
+            text-decoration: none;
+            h3 { color: $about-colour; }
+        }
+        svg {
+            margin-bottom: -6px;
+            path {
+                fill: #f9f5e8;
+            }
+        }
+    }
+
+    .media {
+        position: relative;
+    }
+
+    .post-img  {
+        overflow:hidden;
+        padding-bottom: 43%; /* 16:9 */
+        // padding-bottom: 56%; /* 16:9 */
+        position: relative;
+        @include breakpoint( $mq-small ) {
+            padding-bottom: 50%;
+        }
+
+        img {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+        }
+    }
+
+    .post-wrap {
+        float: left;
+        list-style: none;
+        margin-bottom:200px;
+        padding-right: 10px;
+        width:32.9%;
+        opacity: 0;
+
+        &:last-child {
+            margin-bottom: 20px
+        }
+    }
+
+
+    @include breakpoint( $mq-large ) {
+
+        .post-wrap {
+            width:33.333%;
+            margin-bottom: 30px;
+
+            &:nth-child(2) {
+                margin-top: 150px;
+            }
+
+            &:nth-child(3) {
+                margin-top: 300px;
+            }
+
+            &:nth-child(3n) {
+                padding-right: 0px;
+            }
+        }
+    }
+
+    @include breakpoint( $mq-medium ) {
+
+        .post-wrap  {
+            width:50%;
+
+            &:nth-child(even) {
+                padding-right: 0px
+            }
+
+            &:nth-child(2) {
+                margin-top: 150px;
+            }
+
+            &:nth-child(3),
+            &:nth-child(3n) {
+                margin-top: 0;
+                padding-right: 10px;
+            }
+        }
+
+        .post-title-inner {
+            font-size: $font-size-really-large;
+        }
+    }
+
+    @include breakpoint( 1030px ) {
+
+        .post-wrap {
+            width:100%;
+            padding-right: 0px;
+
+            &:first-child {
+                margin-top: 150px;
+            }
+
+            &:nth-child(2) {
+                margin-top: 0;
+            }
+
+            &:nth-child(3n) {
+                padding-right: 0px;
+            }
+        }
+    }
+
+    @include breakpoint( $mq-small ) {
+
+        .post-wrap {
+
+            &:first-child {
+                margin-top: 140px;
+            }
+        }
+
+        .post-title-inner {
+            font-size: 1em;
+        }
     }
 }
-#posts-wrap .share { 
-    width:20px; 
-    height:16px; 
-    background:url(images/share.png); 
-    display:block; 
-    float: right; 
-    margin-top: 3px;
-}   
-    
-#posts-wrap .post-img img { 
-    position: absolute;
-    top: 0; 
-    bottom: 0; 
-    left: 0; 
-    right: 0; 
-    width: 100%;
-}
-
 
     // extend scroll bar
     .journal .mCSB_scrollTools .mCSB_dragger:active .mCSB_dragger_bar,
     .journal .mCSB_scrollTools .mCSB_dragger.mCSB_dragger_onDrag .mCSB_dragger_bar{ background: $journal-colour; }
     .journal .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar{ border-color: $journal-colour; }
 
-    #journal .arrow-up{ 
+    #journal .arrow-up{
         left: 0;
-        width: 7%; 
-        position: absolute; 
+        width: 7%;
+        position: absolute;
     }
         .journal .arrow-up .inner svg path{ fill : $journal-colour; }
         .journal .arrow-up .inner { border-top-color : $journal-colour; }
@@ -217,6 +290,6 @@
     #menu-item-journal.current-menu-item a,
     #menu-item-journal:hover a  { color: $journal-colour; }
     #menu-item-journal.current-menu-item svg path,
-    #menu-item-journal:hover svg path { stroke : $journal-colour; }
- 
+    #menu-item-journal:hover svg path { stroke: $journal-colour; }
+
 

@@ -6,7 +6,9 @@ define([
     'models/svg',
     'plugins',
     'models/modules/category/listItem',
-    'utils/utils'
+    'utils/utils',
+    'data/events',
+    'controllers/journal_controller'
 ], function(
     $,
     global,
@@ -15,7 +17,9 @@ define([
     svg,
     Plugins,
     CategorylistItemModel,
-    Utils
+    Utils,
+    Events,
+    JournalController
 ) {
 
     "use strict";
@@ -36,10 +40,12 @@ define([
             'mouseout  .hitArea': 'onMouseout'
         },
 
-        initialize: function() {
+        initialize: function(options) {
             _.bindAll(this,
                 'update'
             );
+
+            this.eventHandler = options.eventHandler;
             this.$el.append('<div class="hitArea"></div>');
             this.$el.attr('id', 'icon-' + this.model.get('slug'));
             // Render on content change
@@ -74,33 +80,30 @@ define([
 
         setCurrent: function() {
             var that = this;
-            this.setter('current', true);
+            this.model.set('current', true);
 
             setTimeout(function() {
                 that.$el.addClass('selected');
             }, 2000);
+
+            console.log(this.model.get('slug'));
+
+            JournalController.setCurrentCategory(this.model.get('slug'));
+            this.eventHandler.trigger(Events.Category.Change);
         },
 
         onMouseover: function() {
-            if (!this.getter('current')) {
-                this.setter('mouseover', true);
+            if (!this.model.get('current')) {
+                this.model.set('mouseover', true);
                 this.$el.addClass('selected');
             }
         },
 
         onMouseout: function() {
-            if (!this.getter('current')) {
-                this.setter('mouseover', false);
+            if (!this.model.get('current')) {
+                this.model.set('mouseover', false);
                 this.$el.removeClass('selected');
             }
-        },
-
-        setter: function(target, value) {
-            this.model.set(target, value);
-        },
-
-        getter: function(target) {
-            return this.model.get(target);
         }
     });
 });

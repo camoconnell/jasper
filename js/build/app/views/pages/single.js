@@ -4,6 +4,7 @@ define([
     'underscore',
     'backbone',
     'plugins',
+    'data/events',
     'models/page',
     'models/pages/journal/single',
     'utils/utils',
@@ -19,6 +20,7 @@ define([
     _,
     Backbone,
     Plugins,
+    Events,
     PageModel,
     SingleModel,
     Utils,
@@ -48,14 +50,18 @@ define([
         initialize: function(options) {
 
             _.bindAll(this,
-                'setScrollbar'
+                'setScrollbar',
+                'onPostSelected'
             );
 
             this.setAttributes(options);
             this.$el.attr('id', 'single');
+
+            this.listenTo(Backbone, Events.Posts.Selected, this.onPostSelected);
         },
 
-        setModel: function(model) {
+        onPostSelected: function(model) {
+            console.log(model);
             this.selectedModel = model;
             this.parseUrl();
             this.render();

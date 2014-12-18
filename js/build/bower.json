@@ -12,8 +12,10 @@
         "greensock": "latest",
         "lazy-line-painter": "latest",
         "Lettering.js": "latest",
-        "socialite-js": "latest",
-        "fitvids": "latest"
+        "fitvids": "latest",
+        "isotope": "latest",
+        "jquery-bridget": "latest",
+        "imagesloaded": "latest"
     },
     "devDependencies": {}
 }

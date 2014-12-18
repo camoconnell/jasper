@@ -6,9 +6,9 @@ define([
     'models/svg',
     'plugins',
     'utils/utils',
-    'collections/categories',
     'views/modules/category/listItem',
-    'models/modules/category/controller'
+    'models/modules/category/controller',
+    'controllers/journal_controller'
 ], function(
     $,
     global,
@@ -17,60 +17,53 @@ define([
     svg,
     Plugins,
     Utils,
-    CategoryWidgetCollection,
     CategoryWidgetItem,
-    CategoryWidgetModel
+    CategoryWidgetModel,
+    JournalController
 ) {
 
-    "use strict";
+    'use strict';
 
     return Backbone.View.extend({
 
         model: new CategoryWidgetModel(),
 
-        ON_LOAD_COMPLETE: 'load:complete',
-
         initialize: function(options) {
 
             _.bindAll(this,
-                'onCollectionLoaded',
                 'disable',
                 'enable'
             );
 
-            this.model.set('category', options.category);
+            this.eventHandler = options.eventHandler;
             this._views = {}; // child views
-            this.$mover = this.$el.find('.mover');
-            this.collection = new CategoryWidgetCollection();
-            this.collection.fetch({
-                success: this.onCollectionLoaded,
-                dataType: "jsonp"
-            });
+            this.$mover = this.$('.mover');
         },
 
-        onCollectionLoaded: function() {
-            this.build();
-            this.enable();
-            this.trigger(this.ON_LOAD_COMPLETE);
-        },
+        render: function() {
 
-        build: function() {
             this.collection.each(function(categoryModel) {
+
                 var categoryWidgetItem = new CategoryWidgetItem({
-                    model: categoryModel
+                    model: categoryModel,
+                    eventHandler: this.eventHandler
                 });
+
                 this._views[categoryModel.get('slug')] = categoryWidgetItem;
-                if (this.getter('category') === categoryModel.get('slug')) {
+
+                if (JournalController.getCurrentCategory() === categoryModel.get('slug')) {
                     categoryWidgetItem.setCurrent();
                     this.select(categoryModel);
                 }
             }, this);
+
+            this.enable();
         },
 
         update: function(e) {
             // change:current fires twice,
             // Don't call setCategory if category hasn't changed
-            if (e.get('slug') !== this.getter('category')) {
+            if (JournalController.getCurrentCategory() !== e.get('slug')) {
                 this.select(e);
                 this.$mover.removeClass('display');
             }
@@ -80,21 +73,21 @@ define([
             this.$el.find('.description .info h2').html(categoryModel.get('title'));
             this.$el.find('.description .info p').html(categoryModel.get('description'));
 
-            this.setter('category', categoryModel.get('slug'));
-            this.setter('post_count', categoryModel.get('post_count'));
+            this.model.set('category', categoryModel.get('slug'));
+            this.model.set('post_count', categoryModel.get('post_count'));
 
-            if (!global.firstPageLoad) {
+            /*if (!global.firstPageLoad) {
                 this.saveUrl();
             } else {
                 global.firstPageLoad = false;
-            }
+            }*/
         },
 
-        saveUrl: function() {
-            var category = this.getter('category');
+        /*saveUrl: function() {
+            var category = JournalController.getCurrentCategory();
             Backbone.history.navigate('journal/' + category);
             document.title = 'NMF / ' + category.capitalize();
-        },
+        },*/
 
         enable: function() {
             this.listenTo(this.collection, 'change:current', this.update);
@@ -116,18 +109,6 @@ define([
                 this.$mover.addClass('delay');
                 this.$mover.removeClass('display');
             }
-        },
-
-        setter: function(target, value) {
-            this.model.set(target, value);
-        },
-
-        getter: function(target) {
-            return this.model.get(target);
-        },
-
-        getCategory: function() {
-            return this.model.get('category');
         }
     });
 });

@@ -4,6 +4,7 @@ define([
     'underscore',
     'backbone',
     'plugins',
+    'data/events',
     'models/pages',
     'utils/utils',
     'collections/pages',
@@ -13,14 +14,14 @@ define([
     'views/pages/journal',
     'views/pages/training',
     'views/pages/goodwords',
-    'views/pages/single',
-    'utils/event_bus'
+    'views/pages/single'
 ], function(
     $,
     global,
     _,
     Backbone,
     Plugins,
+    Events,
     PagesModel,
     Utils,
     PagesCollection,
@@ -30,8 +31,7 @@ define([
     JournalView,
     TrainingView,
     GoodwordsView,
-    SingleView,
-    Bus
+    SingleView
 ) {
     "use strict";
 
@@ -43,7 +43,8 @@ define([
 
             _.bindAll(this,
                 'render',
-                'initView'
+                'initView',
+                'onEntrySelected'
             );
             this.pages = {}; // child views
 
@@ -100,7 +101,7 @@ define([
                 this.$el.append(this.pages.single.el);
             }
             this.collection.add(this.pages.single.model);
-            Bus.on('entry:selected', this.onEntrySelected, this);
+            this.listenTo(Backbone, Events.Posts.Selected, this.onEntrySelected);
 
             // init page transition
             this.transition = new PageTransition({
@@ -216,8 +217,7 @@ define([
         },
 
         onEntrySelected: function() {
-            var selectedModel = this.pages.journal.getSelected();
-            this.pages.single.setModel(selectedModel);
+
             // controller listens for single selection to deselect menu widget
             this.setter('type', 'single');
             // deselect menu

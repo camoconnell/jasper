@@ -3,88 +3,58 @@ define([
     'global',
     'underscore',
     'backbone',
-    'models/modules/postsLayout',
-    'plugins'
+    'views/pages/journal/entry',
+    'isotope',
+    'bridget',
+    'controllers/journal_controller'
+    /*'imagesloaded'*/
 ], function(
     $,
     global,
     _,
     Backbone,
-    PostsLayoutModel,
-    Plugins
+    EntryView,
+    Isotope,
+    bridget,
+    JournalController
+    /* Imagesloaded*/
 ) {
 
     "use strict";
 
     return Backbone.View.extend({
 
-        model: new PostsLayoutModel(),
-
         initialize: function(options) {
 
             _.bindAll(this,
-                'calcColWidth',
                 'updateLayout',
                 'enable',
                 'disable',
-                'onresize',
-                'changeColCnt'
+                'onresize'
             );
 
-            this.$reLayoutBtn = options.reLayoutBtn;
+            $.bridget('isotope', Isotope);
+            /*$.bridget('imagesLoaded', Imagesloaded);*/
+
             this.scrollbarView = options.scrollbarView;
-            this.setter('post_count', options.postCount);
+
             this.render();
         },
 
         render: function() {
 
-            var that = this;
-            this.changeColCnt();
-
-            var posts = this.getter('posts');
-            posts.push({
-                'id': 'posts',
-                'callback': this.changeColCnt
-            });
-            this.setter('posts', posts);
-
-            this.build();
-
-            $(window).smartresize(function(e) {
-                that.$el.isotope({
-                    masonry: {
-                        columnWidth: that.calcColWidth()
-                    }
-                });
+            this.$el.isotope({
+                itemSelector: '.post-wrap',
+                transitionDuration: 0
             });
 
-            setTimeout(function() {
-                if (!global.smart.phone) {
-                    that.scrollbarView.update();
-                }
-                $(window).trigger('resize');
-            }, 300);
-
-            this.calcLayout();
             this.enable();
-
-            return this;
         },
+
 
         update: function() {
 
-            var size = (this.getter('size') === 'small') ? 'large' : 'small',
-                layoutSize = this.getter(size),
-                that = this,
-                collInfo = this.getter('columnInfo');
-
-            $.each(collInfo, function(key, value) {
-                this.breakpoint = layoutSize[key];
-            });
-
-            this.setter('columnInfo', collInfo);
-            this.setter('size', size);
+            var that = this;
 
             $(window).trigger('resize');
             setTimeout(function() {
@@ -94,140 +64,43 @@ define([
                 $(window).trigger('resize');
 
             }, 600); // the timeout duration must happen after the transition set in scss/modules/_base.scss
-
-            return this;
         },
 
+        onresize: function() {},
 
-        onresize: function() {
-            $.each(this.getter('posts'), function(k, v) {
-                this.callback();
-            });
-        },
+        insertPosts: function() {
 
-
-        calcColWidth: function() {
-
-            var colWidth = this.$el.width() / this.model.get('numOfColumns');
-
-            return colWidth;
-        },
-
-
-        changeColCnt: function() {
-
-            var w = this.$el.width();
-            var columnInfo = this.model.get('columnInfo');
-            var that = this;
-
-            $.each(columnInfo, function(key, value) {
-
-                if (key === 0) {
-
-                    if (w <= this.breakpoint)
-                        that.setColWidths(this);
-
-                } else if (key == (columnInfo.length - 1)) {
-
-                    if (w >= this.breakpoint)
-                        that.setColWidths(this);
-
-                } else if (w >= ((columnInfo[key - 1].breakpoint) + 1) && w <= this.breakpoint) {
-                    that.setColWidths(this);
-                }
-            });
-        },
-
-
-        setColWidths: function(data) {
-
-            this.setter('numOfColumns', data.numOfCols);
-
-            this.$el.children().removeClass('whole half third quarter');
-            if (!this.$el.children().hasClass('selected')) {
-                this.$el.children().addClass(data.pWidth);
-            } else {
-                var $selected = this.$el.children().closest('.selected');
-                this.$el.children().not($selected).addClass(data.pWidth);
-            }
-        },
-
-
-        build: function() {
-
-            var that = this;
-
-            this.$el.imagesLoaded(function() {
-                that.$el.isotope({
-                    itemSelector: '.post-wrap',
-
-                    // use own css transitions
-                    transformsEnabled: false,
-
-                    // disable normal resizing
-                    resizable: false,
-
-                    // set columnWidth to a percentage of container width
-                    masonry: {
-                        columnWidth: that.calcColWidth
-                    }
+            var postsCollection = JournalController.postsCollection;
+            postsCollection.each(function(postModel, index) {
+                var entry = new EntryView({
+                    model: postModel
                 });
+                this.$el.isotope('insert', entry.el);
+                TweenMax.fromTo(entry.el, 1.2, {
+                    y: '100%',
+                    opacity: 0
+                }, {
+                    y: '0%',
+                    opacity: 1,
+                    force3D: true,
+                    ease: Expo.easeOut,
+                    delay: 0.15 + (index * 0.1)
+                });
+            }, this);
 
-                setTimeout(function() {
-                    that.$el.css({
-                        'opacity': 1
-                    });
-                }, 800);
-            });
-        },
-
-
-        insert: function(data) {
-            this.$el.isotope('insert', data.entry);
-            this.$el.css({
-                'opacity': 1
-            });
-
-            // Calculate layout
-            // if post count is less than 3 use large layout
-            this.setter('post_count', data.count);
-            this.calcLayout();
+            var self = this;
+            _.delay(function() {
+                self.$el.isotope('layout');
+            }, 1000);
 
             if (!global.smart.phone) {
                 this.scrollbarView.update();
             }
-            $(window).trigger('resize');
         },
 
-
-        calcLayout: function() {
-
-            var post_count = this.getter('post_count');
-
-            if (post_count < 3) {
-                // simulate togge behavour, so set the opposite - todo - revisit
-                this.setter('size', 'small');
-                this.update();
-                this.$reLayoutBtn.addClass('hide');
-            } else {
-                this.$reLayoutBtn.removeClass('hide');
-            }
+        removePosts: function() {
+            this.$el.isotope('remove', this.$el.children());
         },
-
-
-        destroy: function(options) {
-
-            var that = this;
-
-            this.$el.css({
-                'opacity': 0
-            });
-
-            setTimeout(function() {
-                that.$el.isotope('remove', that.$el.children(), options.onComplete);
-            }, 500);
-        },
-
 
         updateLayout: function() {
 
@@ -243,9 +116,6 @@ define([
 
         enable: function() {
 
-            // add listeners
-            this.$reLayoutBtn.on('click', this.updateLayout);
-
             // add resize to resize stack & call resize
             global.handlers.resize.add({
                 'id': 'postLayout',
@@ -257,20 +127,8 @@ define([
 
         disable: function() {
 
-            // remove listeners
-            this.$reLayoutBtn.off();
-
             // remove from resize stack
             global.handlers.resize.remove('postLayout');
-        },
-
-
-        getter: function(value) {
-            return this.model.get(value);
-        },
-
-        setter: function(target, value) {
-            this.model.set(target, value);
         }
     });
 });

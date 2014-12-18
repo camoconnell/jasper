@@ -2,27 +2,27 @@ define([
     'jquery',
     'global',
     'underscore',
-    'plugins',
+    'data/events',
     'views/pages/page',
-    'views/pages/journal/entry',
     'collections/posts',
     'views/modules/pagination',
     'views/modules/category/controller',
-    'views/modules/postsLayout'
+    'views/modules/postsLayout',
+    'controllers/journal_controller'
 ], function(
     $,
     global,
     _,
-    Plugins,
+    Events,
     PageView,
-    EntryView,
     PostsCollection,
     PaginationView,
     CategoryWidgetView,
-    PostsLayoutView
+    PostsLayoutView,
+    JournalController
 ) {
 
-    "use strict";
+    'use strict';
 
     return PageView.extend({
 
@@ -34,7 +34,7 @@ define([
 
         categoryWidgetView: null,
         paginationView: null,
-        postsLayoutView: null,
+        postsView: null,
 
         $postsWrap: null,
         $categoryWidget: null,
@@ -42,159 +42,126 @@ define([
         initialize: function(options) {
 
             _.bindAll(this,
-                'onPostSelected',
-                'onPaginateChange',
-                'onPostsDone',
-                'onPostsFail',
-                'onCategoryWidgetLoaded'
+                'onPostsFetched',
+                'onJournalReady',
+                'onTotalScroll'
             );
+
+            this.eventHandler = {};
+            _.extend(this.eventHandler, Backbone.Events);
 
             this.setAttributes(options);
         },
 
         render: function() {
-            // category will be the second index with the url value,
-            // if no 2nd index exists default to all
-            this.$postsWrap = this.$el.find('#posts-wrap');
-            this.$categoryWidget = this.$el.find('.categoryWidget');
 
-            var urlValues = this.getter('urlValues');
+            this.$postsWrap = this.$('#posts-wrap');
+            this.$categoryWidget = this.$('.categoryWidget');
+            this.$scrollpane = this.$('.scrollpane');
+            this.$arrowUp = this.$('.arrow-up');
+            this.$pagination = this.$('.pagination');
+
+            this.parseUrlForCategory();
+
+            this.listenToOnce(this.eventHandler, Events.Journal.Ready, this.onJournalReady);
+            JournalController.initialize({
+                eventHandler: this.eventHandler
+            });
+        },
+
+        /**
+         * parseUrlForCategory
+         * Category will be the second index within the url array,
+         * if no 2nd index exists default to 'all'.
+         */
+        parseUrlForCategory: function() {
+            var urlValues = this.model.get('urlValues');
             var category = (urlValues[1] === undefined) ? 'all' : urlValues[1];
-            this.setter('category', category);
-
-            this.collection = new PostsCollection();
-            this.listenTo(this.collection, 'change:current', this.onPostSelected);
-
-            this.setCategoryWidget();
-            this.setPagination();
-            this.setScrollbar();
-            this.setLayout();
-            this.loadPosts();
+            JournalController.setCurrentCategory(category);
         },
 
-        onPostSelected: function(model) {
-            this.model.setSelected(model);
-            this.trigger(this.ENTRY_SELECTED);
+        onJournalReady: function() {
+            this.createCategoryWidget();
+            this.createPagination();
+            this.createScrollbar();
+            this.createPostsView();
         },
 
-        getSelected: function() {
-            return this.model.getSelected();
-        },
+        createCategoryWidget: function() {
 
-        setCategoryWidget: function() {
             this.categoryWidgetView = new CategoryWidgetView({
                 el: this.$categoryWidget,
-                category: this.getter('category')
-            });
-            this.categoryWidgetView.on(this.categoryWidgetView.ON_LOAD_COMPLETE, this.onCategoryWidgetLoaded);
-        },
-
-        setPagination: function() {
-            this.paginationView = new PaginationView({
-                el: $('.pagination')
-            });
-            this.listenTo(this.paginationView.model, 'change:pageIndex', this.onPaginateChange);
-        },
-
-        setScrollbar: function() {
-            this.addScrollbar({
-                el: this.$el.find('.scrollpane'),
-                toTop: this.$el.find('.arrow-up'),
-                callbacks: {
-                    onTotalScroll: _.throttle(this.paginationView.load, 4000)
-                }
+                collection: JournalController.categoriesCollection,
+                eventHandler: this.eventHandler
             });
 
-            console.log(this.scrollbarView);
-        },
+            this.categoryWidgetView.render();
+            this.listenTo(this.eventHandler, Events.Category.Change, this.onCategoryChange);
 
-        onPaginateChange: function() {
-            this.setter('updateType', 'paginate');
-            this.loadPosts();
-        },
-
-        onCategoryWidgetLoaded: function() {
-            this.categoryWidgetView.off(this.categoryWidgetView.ON_LOAD_COMPLETE);
-            // listen to category change after render ( fetched )
-            this.listenTo(this.categoryWidgetView.model, 'change:category', this.onCategoryChange);
             this.addInstance({
                 hook: 'categoryWidget',
                 obj: this.categoryWidgetView
             });
         },
 
-        onCategoryChange: function() {
-            var newCategory = this.categoryWidgetView.getCategory();
-            var currentCategory = this.getter('category');
-            // Don't call loadPosts if category hasn't changed
-            if (newCategory === currentCategory) {
-                return;
-            }
-            // post count changes with each category selection
-            this.setter('updateType', 'categoryChange');
-            this.setter('category', newCategory);
-            this.loadPosts();
+        getSelected: function() {
+            return this.model.getSelected();
         },
 
-        loadPosts: function() {
-            var category = this.getter('category');
-            this.collection.setQueryString(category);
-            this.collection.fetch({
-                'success': this.onPostsDone,
-                'error': this.onPostsFail,
-                'dataType': "jsonp"
+        createPagination: function() {
+            this.paginationView = new PaginationView({
+                el: this.$pagination
+            });
+            this.paginationView.render();
+        },
+
+        createScrollbar: function() {
+            this.addScrollbar({
+                el: this.$scrollpane,
+                toTop: this.$arrowUp,
+                callbacks: {
+                    onTotalScroll: _.throttle(this.onTotalScroll, 4000)
+                }
             });
         },
 
-        onPostsDone: function() {
-            var that = this;
+        onTotalScroll: function() {
+            this.model.set('updateType', 'paginate');
+            JournalController.lazyload();
+        },
+
+        onCategoryChange: function() {
+            this.model.set('updateType', 'categoryChange');
+            JournalController.resetPageIndex();
+            JournalController.fetchPosts();
+        },
+
+        onPostsFetched: function() {
+
             // if category change, remove old posts
-            if (this.getter('updateType') === 'categoryChange') {
-                this.postsLayoutView.destroy({
-                    onComplete: function() {
-                        that.insertPosts();
-                        that.paginationView.render(that.returnPostCount());
-                    }
-                });
-            } else {
-                this.insertPosts();
-                this.paginationView.update();
+            if (this.model.get('updateType') === 'categoryChange') {
+                this.postsView.removePosts();
             }
+
+            this.postsView.insertPosts();
+            // this.paginationView.render();
         },
 
-        onPostsFail: function() {},
+        createPostsView: function() {
 
-        insertPosts: function() {
-            var postCount = this.returnPostCount();
-            this.collection.each(function(postModel) {
-                var entry = new EntryView({
-                    model: postModel
-                });
-                this.postsLayoutView.insert({
-                    entry: entry.$el,
-                    count: postCount
-                });
-            }, this);
-        },
-
-        returnPostCount: function() {
-            this.setter('categoryPostCount', this.categoryWidgetView.getter('post_count'));
-            return this.getter('categoryPostCount');
-        },
-
-        setLayout: function() {
-
-            this.postsLayoutView = new PostsLayoutView({
+            this.postsView = new PostsLayoutView({
                 el: this.$postsWrap,
-                reLayoutBtn: $('.layout'),
-                scrollbarView: (global.smart.phone) ? null : this.scrollbarView,
-                postCount: this.returnPostCount()
+                scrollbarView: (global.smart.phone) ? null : this.scrollbarView
             });
 
             this.addInstance({
                 hook: 'postsLayoutView',
-                obj: this.postsLayoutView
+                obj: this.postsView
             });
+
+            this.listenTo(this.eventHandler, Events.Posts.Fetched, this.onPostsFetched);
+            this.postsView.insertPosts();
+            this.paginationView.render();
         }
     });
 });

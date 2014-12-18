@@ -2,14 +2,14 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    'utils/event_bus',
+    'data/events',
     'views/modules/share',
     'text!templates/pages/journal/entry.html'
 ], function(
     $,
     _,
     Backbone,
-    Bus,
+    Events,
     Share,
     Template
 ) {
@@ -40,7 +40,7 @@ define([
         onSelect: function(event) {
             event.preventDefault();
             this.model.set('current', true);
-            Bus.trigger('entry:selected');
+            Backbone.trigger(Events.Posts.Selected, this.model);
         },
 
         addShareBtns: function() {
